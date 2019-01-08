@@ -12,7 +12,7 @@ const OrderDetail = require('orderDetail')
  */
 Order.belongsTo(User) //userId
 User.hasMany(Order) //userId
-Payment.belongsTo(User) //paymentId
+Payment.belongsTo(User, {as: 'paymentId'}) //paymentId
 User.hasMany(Payment) //paymentId
 OrderDetail.belongsTo(Product) //productId
 OrderDetail.belongsTo(Order, {as: 'cartId'}) //cartId
