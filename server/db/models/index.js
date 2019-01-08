@@ -10,13 +10,16 @@ const OrderDetail = require('./orderDetail')
  *
  *    BlogPost.belongsTo(User)
  */
-Order.belongsTo(User) //userId
-User.hasMany(Order) //userId
-Payment.belongsTo(User, {as: 'paymentId'}) //paymentId
-User.hasMany(Payment) //paymentId
-OrderDetail.belongsTo(Product) //productId
-OrderDetail.belongsTo(Order, {as: 'cartId'}) //cartId
-Order.hasMany(OrderDetail) //cartId
+Order.belongsTo(User) //userId in Order
+User.hasMany(Order) //userId in Order
+
+Payment.belongsTo(User) //userId in Payment
+User.hasMany(Payment) //userId in Payment
+
+OrderDetail.belongsTo(Product) //productId in OrderDetail
+
+OrderDetail.belongsTo(Order) //orderId in OrderDetail
+Order.hasMany(OrderDetail) //orderId in OrderDetail
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
