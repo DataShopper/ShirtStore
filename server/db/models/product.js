@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Products = db.define('products', {
+const Product = db.define('product', {
   name: {
     allowNull: false,
     validate: {
@@ -56,7 +56,7 @@ const Products = db.define('products', {
   },
 })
 
-module.exports = Products
+module.exports = Product
 
 
 
