@@ -3,15 +3,15 @@ const db = require('../db')
 
 const Payment = db.define('payment', {
   cardNumber: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  expDate: {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
+  expDate: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
   cvv: {
-    type: Sequelize.STRG,
+    type: Sequelize.INTEGER,
     allowNull: false,
   }
 })
