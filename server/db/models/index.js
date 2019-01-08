@@ -2,7 +2,7 @@ const User = require('./user')
 const Order = require('./order')
 const Product = require('./product')
 const Payment = require('./payment')
-const OrderDetail = require('orderDetail')
+const OrderDetail = require('./orderDetail')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
