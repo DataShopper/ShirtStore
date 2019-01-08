@@ -30,7 +30,7 @@ async function seed() {
     Product.create({
       name: 'Funky Shirt',
       price: 9.95,
-      sizes: ['S', 'M', 'L'],
+      sizes: ['S', 'M'],
       style: 'funky',
       count: 12,
       color: [
@@ -54,18 +54,7 @@ async function seed() {
       sizes: ['S', 'M', 'L'],
       style: 'wacky',
       count: 15,
-      color: [
-        'Red',
-        'Blue',
-        'Black',
-        'Green',
-        'Gold',
-        'Orange',
-        'Pink',
-        'Grey',
-        'Yellow',
-        'Purple'
-      ],
+      color: ['Orange', 'Pink', 'Grey', 'Yellow', 'Purple'],
       imageUrl: 'defaultshirt1.jpg',
       description: 'This shirt is seriously wacky.',
       category: ['Women', 'Men', 'Children']
@@ -76,18 +65,7 @@ async function seed() {
       sizes: ['S', 'M', 'L'],
       style: 'boring',
       count: 20,
-      color: [
-        'Red',
-        'Blue',
-        'Black',
-        'Green',
-        'Gold',
-        'Orange',
-        'Pink',
-        'Grey',
-        'Yellow',
-        'Purple'
-      ],
+      color: ['Orange', 'Pink', 'Grey', 'Yellow', 'Purple'],
       imageUrl: 'defaultshirt1.jpg',
       description: 'This shirt is boring.',
       category: ['Women', 'Men', 'Children']
@@ -104,37 +82,24 @@ async function seed() {
         'Black',
         'Green',
         'Gold',
-        'Orange',
-        'Pink',
         'Grey',
         'Yellow',
         'Purple'
       ],
       imageUrl: 'defaultshirt1.jpg',
       description: 'This shirt is really bad.',
-      category: ['Women', 'Men', 'Children']
+      category: ['Men', 'Children']
     }),
     Product.create({
       name: 'Expensive Shirt',
       price: 99.95,
-      sizes: ['S', 'M', 'L'],
+      sizes: ['S', 'L'],
       style: 'expensive',
       count: 10,
-      color: [
-        'Red',
-        'Blue',
-        'Black',
-        'Green',
-        'Gold',
-        'Orange',
-        'Pink',
-        'Grey',
-        'Yellow',
-        'Purple'
-      ],
+      color: ['Black', 'Gold'],
       imageUrl: 'defaultshirt1.jpg',
       description: 'This shirt is really pricey.',
-      category: ['Women', 'Men', 'Children']
+      category: ['Women', 'Men']
     }),
     Product.create({
       name: 'Smelly Shirt',
@@ -161,7 +126,7 @@ async function seed() {
     Product.create({
       name: 'Pretty Shirt',
       price: 29.95,
-      sizes: ['S', 'M', 'L'],
+      sizes: ['S', 'M'],
       style: 'pretty',
       count: 26,
       color: [
@@ -178,7 +143,7 @@ async function seed() {
       ],
       imageUrl: 'defaultshirt1.jpg',
       description: 'This shirt is pretty.',
-      category: ['Women', 'Men', 'Children']
+      category: ['Women', 'Children']
     }),
     Product.create({
       name: 'Special Shirt',
@@ -186,18 +151,7 @@ async function seed() {
       sizes: ['S', 'M', 'L'],
       style: 'funkyspecial',
       count: 3,
-      color: [
-        'Red',
-        'Blue',
-        'Black',
-        'Green',
-        'Gold',
-        'Orange',
-        'Pink',
-        'Grey',
-        'Yellow',
-        'Purple'
-      ],
+      color: ['Red', 'Gold', 'Orange', 'Pink', 'Grey', 'Yellow', 'Purple'],
       imageUrl: 'defaultshirt1.jpg',
       description: 'This shirt is special. Stock is limited.',
       category: ['Women', 'Men', 'Children']
@@ -206,9 +160,9 @@ async function seed() {
 
   const payments = await Promise.all([
     Payment.create({
-      cardNumber: '0000000000001234',
+      cardNumber: 9999999999991234,
       expDate: '0119',
-      cvv: '000'
+      cvv: 999
     })
   ])
 

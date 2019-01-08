@@ -19,10 +19,7 @@ const Product = db.define('product', {
   },
 
   sizes: {
-    type: Sequelize.ARRAY(Sequelize.TEXT),
-    validate: {
-      contains: ['S', 'M', 'L']
-    }
+    type: Sequelize.ARRAY(Sequelize.TEXT)
   },
 
   style: {
@@ -34,21 +31,7 @@ const Product = db.define('product', {
   },
 
   color: {
-    type: Sequelize.ARRAY(Sequelize.TEXT),
-    validate: {
-      contains: [
-        'Red',
-        'Blue',
-        'Black',
-        'Green',
-        'Gold',
-        'Orange',
-        'Pink',
-        'Grey',
-        'Yellow',
-        'Purple'
-      ]
-    }
+    type: Sequelize.ARRAY(Sequelize.TEXT)
   },
 
   imageUrl: {
@@ -61,10 +44,7 @@ const Product = db.define('product', {
   },
 
   category: {
-    type: Sequelize.ARRAY(Sequelize.TEXT),
-    contains: {
-      isIn: ['Women', 'Men', 'Children']
-    }
+    type: Sequelize.ARRAY(Sequelize.TEXT)
   }
 })
 
