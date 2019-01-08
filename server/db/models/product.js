@@ -19,9 +19,9 @@ const Product = db.define('product', {
   },
 
   sizes: {
-    type: Sequelize.STRING,
+    type: Sequelize.ARRAY(Sequelize.TEXT),
     validate: {
-      isIn: [['S', 'M', 'L']]
+      contains: ['S', 'M', 'L']
     }
   },
 
@@ -34,21 +34,19 @@ const Product = db.define('product', {
   },
 
   color: {
-    type: Sequelize.STRING,
+    type: Sequelize.ARRAY(Sequelize.TEXT),
     validate: {
-      isIn: [
-        [
-          'Red',
-          'Blue',
-          'Black',
-          'Green',
-          'Gold',
-          'Orange',
-          'Pink',
-          'Grey',
-          'Yellow',
-          'Purple'
-        ]
+      contains: [
+        'Red',
+        'Blue',
+        'Black',
+        'Green',
+        'Gold',
+        'Orange',
+        'Pink',
+        'Grey',
+        'Yellow',
+        'Purple'
       ]
     }
   },
@@ -63,9 +61,9 @@ const Product = db.define('product', {
   },
 
   category: {
-    type: Sequelize.STRING,
-    validate: {
-      isIn: [['Women', 'Men', 'Children']]
+    type: Sequelize.ARRAY(Sequelize.TEXT),
+    contains: {
+      isIn: ['Women', 'Men', 'Children']
     }
   }
 })

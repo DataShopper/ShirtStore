@@ -1,18 +1,220 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Product, Payment} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({
+      firstName: 'Omri',
+      lastName: 'Bernstein',
+      role: 'user',
+      address: '555 FullStack Dr.',
+      email: 'cody@email.com',
+      password: '123'
+    }),
+    User.create({
+      firstName: 'Molly',
+      lastName: 'Seeley',
+      role: 'user',
+      address: '999 FullStack Dr.',
+      email: 'murphy@email.com',
+      password: '123'
+    })
+  ])
+
+  const products = await Promise.all([
+    Product.create({
+      name: 'Funky Shirt',
+      price: 9.95,
+      sizes: ['S', 'M', 'L'],
+      style: 'funky',
+      count: 12,
+      color: [
+        'Red',
+        'Blue',
+        'Black',
+        'Green',
+        'Gold',
+        'Orange',
+        'Pink',
+        'Grey',
+        'Purple'
+      ],
+      imageUrl: 'defaultshirt1.jpg',
+      description: 'This shirt is funky and you love funky.',
+      category: ['Women', 'Men', 'Children']
+    }),
+    Product.create({
+      name: 'Wacky Shirt',
+      price: 8.95,
+      sizes: ['S', 'M', 'L'],
+      style: 'wacky',
+      count: 15,
+      color: [
+        'Red',
+        'Blue',
+        'Black',
+        'Green',
+        'Gold',
+        'Orange',
+        'Pink',
+        'Grey',
+        'Yellow',
+        'Purple'
+      ],
+      imageUrl: 'defaultshirt1.jpg',
+      description: 'This shirt is seriously wacky.',
+      category: ['Women', 'Men', 'Children']
+    }),
+    Product.create({
+      name: 'Boring Shirt',
+      price: 5.95,
+      sizes: ['S', 'M', 'L'],
+      style: 'boring',
+      count: 20,
+      color: [
+        'Red',
+        'Blue',
+        'Black',
+        'Green',
+        'Gold',
+        'Orange',
+        'Pink',
+        'Grey',
+        'Yellow',
+        'Purple'
+      ],
+      imageUrl: 'defaultshirt1.jpg',
+      description: 'This shirt is boring.',
+      category: ['Women', 'Men', 'Children']
+    }),
+    Product.create({
+      name: 'Really Bad Shirt',
+      price: 4.95,
+      sizes: ['S', 'M', 'L'],
+      style: 'bad',
+      count: 25,
+      color: [
+        'Red',
+        'Blue',
+        'Black',
+        'Green',
+        'Gold',
+        'Orange',
+        'Pink',
+        'Grey',
+        'Yellow',
+        'Purple'
+      ],
+      imageUrl: 'defaultshirt1.jpg',
+      description: 'This shirt is really bad.',
+      category: ['Women', 'Men', 'Children']
+    }),
+    Product.create({
+      name: 'Expensive Shirt',
+      price: 99.95,
+      sizes: ['S', 'M', 'L'],
+      style: 'expensive',
+      count: 10,
+      color: [
+        'Red',
+        'Blue',
+        'Black',
+        'Green',
+        'Gold',
+        'Orange',
+        'Pink',
+        'Grey',
+        'Yellow',
+        'Purple'
+      ],
+      imageUrl: 'defaultshirt1.jpg',
+      description: 'This shirt is really pricey.',
+      category: ['Women', 'Men', 'Children']
+    }),
+    Product.create({
+      name: 'Smelly Shirt',
+      price: 3.95,
+      sizes: ['S', 'M', 'L'],
+      style: 'smelly',
+      count: 5,
+      color: [
+        'Red',
+        'Blue',
+        'Black',
+        'Green',
+        'Gold',
+        'Orange',
+        'Pink',
+        'Grey',
+        'Yellow',
+        'Purple'
+      ],
+      imageUrl: 'defaultshirt1.jpg',
+      description: 'This shirt is really smelly.',
+      category: ['Women', 'Men', 'Children']
+    }),
+    Product.create({
+      name: 'Pretty Shirt',
+      price: 29.95,
+      sizes: ['S', 'M', 'L'],
+      style: 'pretty',
+      count: 26,
+      color: [
+        'Red',
+        'Blue',
+        'Black',
+        'Green',
+        'Gold',
+        'Orange',
+        'Pink',
+        'Grey',
+        'Yellow',
+        'Purple'
+      ],
+      imageUrl: 'defaultshirt1.jpg',
+      description: 'This shirt is pretty.',
+      category: ['Women', 'Men', 'Children']
+    }),
+    Product.create({
+      name: 'Special Shirt',
+      price: 39.95,
+      sizes: ['S', 'M', 'L'],
+      style: 'funkyspecial',
+      count: 3,
+      color: [
+        'Red',
+        'Blue',
+        'Black',
+        'Green',
+        'Gold',
+        'Orange',
+        'Pink',
+        'Grey',
+        'Yellow',
+        'Purple'
+      ],
+      imageUrl: 'defaultshirt1.jpg',
+      description: 'This shirt is special. Stock is limited.',
+      category: ['Women', 'Men', 'Children']
+    })
+  ])
+
+  const payments = await Promise.all([
+    Payment.create({
+      cardNumber: '0000000000001234',
+      expDate: '0119',
+      cvv: '000'
+    })
   ])
 
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${products.length} products`)
+  console.log(`seeded ${payments.length} payments`)
   console.log(`seeded successfully`)
 }
 
