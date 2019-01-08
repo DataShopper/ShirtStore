@@ -32,7 +32,14 @@ class AllProducts extends Component {
     return (
       <div>
         {this.props.products.map(p => {
-          return <p>{p.name}</p>
+          return (
+            <div>
+              <p>{p.name}</p>
+              <p>{p.price}</p>
+              <p>{p.imageUrl}</p>
+              <p>{p.description}</p>
+            </div>
+          )
         })}
       </div>
     )
