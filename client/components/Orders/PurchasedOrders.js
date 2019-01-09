@@ -10,7 +10,6 @@ class PurchasedOrders extends React.Component {
     await this.props.getPurchasedOrders(this.props.id)
   }
   render() {
-    console.log(this.props.id)
     const {purchasedOrders} = this.props || []
     return (
       <div>
