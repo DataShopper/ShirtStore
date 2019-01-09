@@ -1,13 +1,26 @@
 const router = require('express').Router()
 const {Product} = require('../db/models')
-module.exports = router
+const session = require('express-session')
 
-//Get all campuses /api/products
+router.use(
+  session({
+    genid: req => {
+      console.log('genid', genuuid())
+      return genuuid()
+    },
+    secret: 'My best friend is Cody'
+  })
+)
+
+//Get all products /api/products
 router.get('/', async (req, res, next) => {
   try {
+    console.log('HELLO', req.session.user)
     const products = await Product.findAll()
     res.json(products)
   } catch (err) {
     next(err)
   }
 })
+
+module.exports = router
