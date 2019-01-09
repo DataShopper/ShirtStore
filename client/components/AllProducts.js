@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store'
 
@@ -38,7 +37,7 @@ class AllProducts extends Component {
               <div>
                 <p>{p.name}</p>
                 <p>{p.price}</p>
-                <p>{p.imageUrl}</p>
+                <img src={p.imageUrl} />
                 <p>{p.description}</p>
               </div>
             </Link>
