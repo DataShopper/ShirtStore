@@ -12,16 +12,17 @@ class AllProducts extends Component {
   }
 
   async componentDidMount() {
-    await this.props.retrieveData
+    await this.props.retrieveData()
     this.setState({loading: false})
   }
 
   render() {
+    const products = this.props.product || []
     if (this.state.loading) {
       return <div />
     }
 
-    if (this.props.products.length < 1) {
+    if (products.length < 1) {
       return (
         <div>
           <p>No products to list.</p>
@@ -31,9 +32,9 @@ class AllProducts extends Component {
 
     return (
       <div>
-        {this.props.products.map(p => {
+        {products.map(p => {
           return (
-            <div>
+            <div key={p.id}>
               <p>{p.name}</p>
               <p>{p.price}</p>
               <p>{p.imageUrl}</p>
@@ -46,12 +47,16 @@ class AllProducts extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  products: state.products
-})
+const mapStateToProps = state => {
+  return {
+    product: state.product
+  }
+}
 
-const mapDispatchToProps = dispatch => ({
-  retrieveData: () => dispatch(fetchProducts())
-})
+const mapDispatchToProps = dispatch => {
+  return {
+    retrieveData: () => dispatch(fetchProducts())
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
