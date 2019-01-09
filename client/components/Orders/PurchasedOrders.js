@@ -5,12 +5,20 @@ import {getPurchasedOrders} from '../../store/orders'
 class PurchasedOrders extends React.Component {
   constructor() {
     super()
+    this.state = {
+      loading: true
+    }
   }
   async componentDidMount() {
     await this.props.getPurchasedOrders(this.props.id)
+    this.setState({loading: false})
   }
+
   render() {
     const {purchasedOrders} = this.props || []
+    if (this.state.loading) {
+      return <div>Loading</div>
+    }
     return (
       <div>
         <ul>
