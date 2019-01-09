@@ -34,12 +34,14 @@ class AllProducts extends Component {
       <div>
         {products.map(p => {
           return (
-            <div key={p.id}>
-              <p>{p.name}</p>
-              <p>{p.price}</p>
-              <p>{p.imageUrl}</p>
-              <p>{p.description}</p>
-            </div>
+            <Link to={`/products/${p.id}`} key={p.id}>
+              <div>
+                <p>{p.name}</p>
+                <p>{p.price}</p>
+                <p>{p.imageUrl}</p>
+                <p>{p.description}</p>
+              </div>
+            </Link>
           )
         })}
       </div>
