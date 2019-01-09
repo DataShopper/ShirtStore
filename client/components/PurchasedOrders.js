@@ -23,19 +23,18 @@ class PurchasedOrders extends React.Component {
             console.log('order', order)
             const shirts = order.orderdetails || []
             return (
-              <div key={order.id}>
+              <li key={order.id}>
                 {shirts.map(shirt => {
                   return (
                     <li key={shirt.id}>
-                      {shirt.color}
-                      <br />
-                      {shirt.size}
-                      <br />
-                      {shirt.imageUrl}
+                      <div>
+                        {shirt.color}
+                        {shirt.size}
+                      </div>
                     </li>
                   )
                 })}
-              </div>
+              </li>
             )
           })}
         </ul>
