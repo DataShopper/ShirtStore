@@ -36,7 +36,7 @@ const Product = db.define('product', {
 
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: 'emptyimage.png'
+    defaultValue: 'defaultImage1.jpeg'
   },
 
   description: {

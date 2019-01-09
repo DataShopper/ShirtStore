@@ -3,7 +3,7 @@ const db = require('../db')
 
 const Order = db.define('order', {
   shirts: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
+    type: Sequelize.ARRAY(Sequelize.INTEGER),
     defaultValue: []
   },
   bought: {

@@ -36,7 +36,7 @@ class AllProducts extends Component {
             <div key={p.id}>
               <p>{p.name}</p>
               <p>{p.price}</p>
-              <p>{p.imageUrl}</p>
+              <img src={p.imageUrl} />
               <p>{p.description}</p>
             </div>
           )
