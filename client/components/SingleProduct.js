@@ -13,7 +13,8 @@ class SingleProduct extends Component {
   }
 
   async componentDidMount() {
-    await this.props.retrieveSingleData()
+    const {retrieveSingleData, product} = this.props
+    await retrieveSingleData(product.id)
     this.setState({loading: false})
   }
 
