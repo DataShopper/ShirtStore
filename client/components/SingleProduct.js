@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {fetchSingleProduct} from '../store'
-import Axios from 'axios'
+import axios from 'axios'
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -17,7 +15,7 @@ class SingleProduct extends Component {
 
   async componentDidMount() {
     const id = this.props.match.params.productId
-    const {data} = await Axios.get(`/api/products/${id}`)
+    const {data} = await axios.get(`/api/products/${id}`)
     this.setState(data)
     this.setState({loading: false})
   }
