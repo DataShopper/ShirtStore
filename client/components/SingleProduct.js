@@ -20,32 +20,26 @@ class SingleProduct extends Component {
     const {data} = await axios.get(`/api/products/${id}`)
     this.setState(data)
     this.setState({loading: false})
-    console.log(this.state)
   }
 
   async handleSelect(evt) {
     await this.setState({
       [evt.target.name]: evt.target.value
     })
-    console.log(this.state)
   }
 
   handleSubmit(evt) {
     evt.preventDefault()
     try {
-      //const value = this.name
       let item = {
         name: this.state.name,
         id: this.state.id,
         sizeChosen: this.state.sizeChosen,
         colorChosen: this.state.colorChosen,
         categoryChosen: this.state.categoryChosen,
-        qty: 3
-        //this.qty Waiting on a quantity dropdown
+        qty: this.state.qty
       }
-      //localStorage.setItem('brug', 'hsdkajhfkjhsdkjfhks')
       localStorage.setItem(this.state.id, JSON.stringify(item))
-      console.log(item)
       toastr.success('Success: Your Account info has been modified.')
     } catch (err) {
       toastr.err(err)
@@ -99,6 +93,17 @@ class SingleProduct extends Component {
           aria-required="true"
         >
           <option>color</option>
+          {color.map((color, idx) => {
+            return (
+              <option
+                key={idx}
+                onChange={this.handleSelect}
+                aria-required="true"
+              >
+                {color}
+              </option>
+            )
+          })}
         </select>
         <select name="qty" onChange={this.handleSelect} aria-required="true">
           <option>quantity</option>
