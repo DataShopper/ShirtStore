@@ -3,9 +3,6 @@ import {connect} from 'react-redux'
 import {getPurchasedOrders} from '../store/orders'
 
 class PurchasedOrders extends React.Component {
-  constructor() {
-    super()
-  }
   async componentDidMount() {
     await this.props.getPurchasedOrders(this.props.id)
   }

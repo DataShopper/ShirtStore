@@ -76,9 +76,9 @@ class SingleProduct extends Component {
           })}
         </select>
         <div>
-          <button>ADD TO CART</button>
-          <button>VIEW CART</button>
-          <button>CONTINUE SHOPPING</button>
+          <button type="button">ADD TO CART</button>
+          <button type="button">VIEW CART</button>
+          <button type="button">CONTINUE SHOPPING</button>
         </div>
       </div>
     )
