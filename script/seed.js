@@ -77,7 +77,7 @@ async function seed() {
         'Grey',
         'Purple'
       ],
-      imageUrl: 'defaultImage1.jpeg',
+      imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is funky and you love funky.',
       category: ['Women', 'Men', 'Children']
     }),
@@ -88,7 +88,7 @@ async function seed() {
       style: 'wacky',
       count: 15,
       color: ['Orange', 'Pink', 'Grey', 'Yellow', 'Purple'],
-      imageUrl: 'defaultImage1.jpeg',
+      imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is seriously wacky.',
       category: ['Women', 'Men', 'Children']
     }),
@@ -99,7 +99,7 @@ async function seed() {
       style: 'boring',
       count: 20,
       color: ['Orange', 'Pink', 'Grey', 'Yellow', 'Purple'],
-      imageUrl: 'defaultImage1.jpeg',
+      imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is boring.',
       category: ['Women', 'Men', 'Children']
     }),
@@ -119,7 +119,7 @@ async function seed() {
         'Yellow',
         'Purple'
       ],
-      imageUrl: 'defaultImage1.jpeg',
+      imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is really bad.',
       category: ['Men', 'Children']
     }),
@@ -130,7 +130,7 @@ async function seed() {
       style: 'expensive',
       count: 10,
       color: ['Black', 'Gold'],
-      imageUrl: 'defaultImage1.jpeg',
+      imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is really pricey.',
       category: ['Women', 'Men']
     }),
@@ -152,7 +152,7 @@ async function seed() {
         'Yellow',
         'Purple'
       ],
-      imageUrl: 'defaultImage1.jpeg',
+      imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is really smelly.',
       category: ['Women', 'Men', 'Children']
     }),
@@ -174,7 +174,7 @@ async function seed() {
         'Yellow',
         'Purple'
       ],
-      imageUrl: 'defaultImage1.jpeg',
+      imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is pretty.',
       category: ['Women', 'Children']
     }),
@@ -185,7 +185,7 @@ async function seed() {
       style: 'funkyspecial',
       count: 3,
       color: ['Red', 'Gold', 'Orange', 'Pink', 'Grey', 'Yellow', 'Purple'],
-      imageUrl: 'defaultImage1.jpeg',
+      imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is special. Stock is limited.',
       category: ['Women', 'Men', 'Children']
     })

@@ -19,7 +19,7 @@ const Product = db.define('product', {
   },
 
   sizes: {
-    type: Sequelize.ARRAY(Sequelize.TEXT)
+    type: Sequelize.ARRAY(Sequelize.STRING)
   },
 
   style: {
@@ -27,16 +27,16 @@ const Product = db.define('product', {
   },
 
   count: {
-    type: Sequelize.STRING
+    type: Sequelize.INTEGER
   },
 
   color: {
-    type: Sequelize.ARRAY(Sequelize.TEXT)
+    type: Sequelize.ARRAY(Sequelize.STRING)
   },
 
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: 'defaultImage1.jpeg'
+    defaultValue: '/defaultImage1.jpeg'
   },
 
   description: {

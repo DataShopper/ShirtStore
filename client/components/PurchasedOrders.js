@@ -7,31 +7,24 @@ class PurchasedOrders extends React.Component {
     super()
   }
   async componentDidMount() {
-    console.log('id', this.props.id)
     await this.props.getPurchasedOrders(this.props.id)
   }
   render() {
-    console.log('hello')
-    //purchasedOrders.id, userId
-    //product.id
-    //user.id
-    const {purchasedOrders, product} = this.props || []
+    const {purchasedOrders} = this.props || []
     return (
       <div>
         <ul>
           {purchasedOrders.map(order => {
-            console.log('order', order)
             const shirts = order.orderdetails || []
             return (
               <li key={order.id}>
                 {shirts.map(shirt => {
                   return (
-                    <li key={shirt.id}>
-                      <div>
-                        {shirt.color}
-                        {shirt.size}
-                      </div>
-                    </li>
+                    <div key={shirt.id}>
+                      {shirt.color}
+                      <br />
+                      {shirt.size}
+                    </div>
                   )
                 })}
               </li>
@@ -45,7 +38,7 @@ class PurchasedOrders extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    products: state.product,
+    products: state.products,
     purchasedOrders: state.purchasedOrders,
     id: state.user.id
   }
