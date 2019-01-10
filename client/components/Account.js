@@ -39,7 +39,6 @@ class Account extends Component {
   }
 
   render() {
-    //console.log(this.props, 'hey')
     return (
       <div>
         <h3
