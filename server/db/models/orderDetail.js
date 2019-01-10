@@ -1,23 +1,23 @@
-const db = require('../db');
-const Sequelize = require('sequelize');
+const db = require('../db')
+const Sequelize = require('sequelize')
 
 const OrderDetail = db.define('orderdetail', {
-  Quantity: {
+  quantity: {
     type: Sequelize.INTEGER,
     allowNull: false
   },
   totalPrice: {
     type: Sequelize.DECIMAL(10, 2),
-    defaultValue: null,
+    defaultValue: null
   },
   size: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   },
   color: {
     type: Sequelize.STRING,
     allowNull: false
   }
-});
+})
 
-module.exports = OrderDetail;
+module.exports = OrderDetail

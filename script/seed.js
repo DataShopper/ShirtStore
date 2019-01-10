@@ -1,7 +1,13 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product, Payment} = require('../server/db/models')
+const {
+  User,
+  Product,
+  Payment,
+  Order,
+  OrderDetail
+} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -26,6 +32,33 @@ async function seed() {
     })
   ])
 
+  const orders = await Promise.all([
+    Order.create({
+      shirts: [6],
+      bought: false,
+      totalPrice: 2.0,
+      userId: 1
+    }),
+    Order.create({
+      shirts: [5],
+      bought: false,
+      totalPrice: 5.0,
+      userId: 2
+    }),
+    Order.create({
+      shirts: [2],
+      bought: true,
+      totalPrice: 3.0,
+      userId: 1
+    }),
+    Order.create({
+      shirts: [3],
+      bought: true,
+      totalPrice: 7.0,
+      userId: 2
+    })
+  ])
+
   const products = await Promise.all([
     Product.create({
       name: 'Funky Shirt',
@@ -44,7 +77,7 @@ async function seed() {
         'Grey',
         'Purple'
       ],
-      imageUrl: 'defaultshirt1.jpg',
+      imageUrl: 'defaultImage1.jpeg',
       description: 'This shirt is funky and you love funky.',
       category: ['Women', 'Men', 'Children']
     }),
@@ -55,7 +88,7 @@ async function seed() {
       style: 'wacky',
       count: 15,
       color: ['Orange', 'Pink', 'Grey', 'Yellow', 'Purple'],
-      imageUrl: 'defaultshirt1.jpg',
+      imageUrl: 'defaultImage1.jpeg',
       description: 'This shirt is seriously wacky.',
       category: ['Women', 'Men', 'Children']
     }),
@@ -66,7 +99,7 @@ async function seed() {
       style: 'boring',
       count: 20,
       color: ['Orange', 'Pink', 'Grey', 'Yellow', 'Purple'],
-      imageUrl: 'defaultshirt1.jpg',
+      imageUrl: 'defaultImage1.jpeg',
       description: 'This shirt is boring.',
       category: ['Women', 'Men', 'Children']
     }),
@@ -86,7 +119,7 @@ async function seed() {
         'Yellow',
         'Purple'
       ],
-      imageUrl: 'defaultshirt1.jpg',
+      imageUrl: 'defaultImage1.jpeg',
       description: 'This shirt is really bad.',
       category: ['Men', 'Children']
     }),
@@ -97,7 +130,7 @@ async function seed() {
       style: 'expensive',
       count: 10,
       color: ['Black', 'Gold'],
-      imageUrl: 'defaultshirt1.jpg',
+      imageUrl: 'defaultImage1.jpeg',
       description: 'This shirt is really pricey.',
       category: ['Women', 'Men']
     }),
@@ -119,7 +152,7 @@ async function seed() {
         'Yellow',
         'Purple'
       ],
-      imageUrl: 'defaultshirt1.jpg',
+      imageUrl: 'defaultImage1.jpeg',
       description: 'This shirt is really smelly.',
       category: ['Women', 'Men', 'Children']
     }),
@@ -141,7 +174,7 @@ async function seed() {
         'Yellow',
         'Purple'
       ],
-      imageUrl: 'defaultshirt1.jpg',
+      imageUrl: 'defaultImage1.jpeg',
       description: 'This shirt is pretty.',
       category: ['Women', 'Children']
     }),
@@ -152,9 +185,36 @@ async function seed() {
       style: 'funkyspecial',
       count: 3,
       color: ['Red', 'Gold', 'Orange', 'Pink', 'Grey', 'Yellow', 'Purple'],
-      imageUrl: 'defaultshirt1.jpg',
+      imageUrl: 'defaultImage1.jpeg',
       description: 'This shirt is special. Stock is limited.',
       category: ['Women', 'Men', 'Children']
+    })
+  ])
+
+  const orderdetails = await Promise.all([
+    OrderDetail.create({
+      productId: 6,
+      quantity: 2,
+      totalPrice: 8.9,
+      size: 'Large',
+      color: 'black',
+      orderId: 3
+    }),
+    OrderDetail.create({
+      productId: 2,
+      quantity: 2,
+      totalPrice: 18.9,
+      size: 'Large',
+      color: 'black',
+      orderId: 3
+    }),
+    OrderDetail.create({
+      productId: 4,
+      quantity: 2,
+      totalPrice: 9.9,
+      size: 'Large',
+      color: 'black',
+      orderId: 4
     })
   ])
 
@@ -169,6 +229,8 @@ async function seed() {
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${payments.length} payments`)
+  console.log(`seeded ${orders.length} orders`)
+  console.log(`seeded ${orderdetails.length} details`)
   console.log(`seeded successfully`)
 }
 
