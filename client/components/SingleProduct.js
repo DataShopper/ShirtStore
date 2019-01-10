@@ -27,10 +27,10 @@ class SingleProduct extends Component {
   }
 
   render() {
-    const product = this.state || {}
-    const size = product.sizes || []
-    const color = product.color || []
-    const category = product.category || []
+    const product = this.state
+    const size = product.sizes
+    const color = product.color
+    const category = product.category
     if (this.state.loading) {
       return <div />
     }
@@ -85,17 +85,4 @@ class SingleProduct extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     product: state.product
-//   }
-// }
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     retrieveSingleData: id => dispatch(fetchSingleProduct(id))
-//   }
-// }
-
-// export default connect(null, mapDispatchToProps)(SingleProduct)
 export default SingleProduct
