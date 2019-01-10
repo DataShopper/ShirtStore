@@ -15,3 +15,24 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/account', async (req, res, next) => {
+  try {
+    const response = await User.update(
+      {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
+      },
+      {
+        where: {
+          id: req.body.id
+        },
+        returning: true,
+        plain: true
+      }
+    )
+    return res.status(200).send(response.user)
+  } catch (err) {
+    next(err)
+  }
+})
