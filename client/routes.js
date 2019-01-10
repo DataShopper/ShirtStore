@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
+import {me} from './store'
 import {
   Login,
   Signup,
@@ -10,7 +11,6 @@ import {
   Account,
   PurchasedOrders
 } from './components'
-import {me} from './store'
 
 /**
  * COMPONENT
@@ -33,7 +33,8 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
             <Route path="/purchasedOrders" component={PurchasedOrders} />
-            <Route path="/products" component={AllProducts} />
+            <Route exact path="/products" component={AllProducts} />
+            <Route path="/products/:productId" component={SingleProduct} />
             <Route path="/account" component={Account} />
           </Switch>
         )}
@@ -55,7 +56,7 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = dispatch => { 
   return {
     loadInitialData() {
       dispatch(me())
