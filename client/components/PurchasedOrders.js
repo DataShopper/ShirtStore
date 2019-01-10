@@ -3,9 +3,6 @@ import {connect} from 'react-redux'
 import {getPurchasedOrders} from '../store/orders'
 
 class PurchasedOrders extends React.Component {
-  constructor() {
-    super()
-  }
   async componentDidMount() {
     console.log('id', this.props.id)
     await this.props.getPurchasedOrders(this.props.id)
@@ -15,7 +12,7 @@ class PurchasedOrders extends React.Component {
     //purchasedOrders.id, userId
     //product.id
     //user.id
-    const {purchasedOrders, product} = this.props || []
+    const {purchasedOrders} = this.props || []
     return (
       <div>
         <ul>
