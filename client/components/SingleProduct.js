@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchSingleProduct} from '../store'
 
@@ -47,9 +46,9 @@ class SingleProduct extends Component {
           {() => this.dropdownMenu(product.category)}
         </div>
         <div>
-          <button>ADD TO CART</button>
-          <button>VIEW CART</button>
-          <button>CONTINUE SHOPPING</button>
+          <button type="button">ADD TO CART</button>
+          <button type="button">VIEW CART</button>
+          <button type="button">CONTINUE SHOPPING</button>
         </div>
       </div>
     )

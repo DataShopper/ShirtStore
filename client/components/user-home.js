@@ -7,7 +7,7 @@ import {AllProducts} from './index'
  * COMPONENT
  */
 export const UserHome = props => {
-  const {email, id} = props
+  const {email} = props
 
   return (
     <div>

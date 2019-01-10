@@ -31,7 +31,7 @@ router.put('/account', async (req, res, next) => {
         plain: true
       }
     )
-    return res.status(200).send(response.user)
+    return res.status(200).send('Updated.')
   } catch (err) {
     next(err)
   }

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import toastr from 'toastr'
 
 class Account extends Component {
   constructor() {
@@ -8,7 +9,8 @@ class Account extends Component {
     this.state = {
       firstName: '',
       lastName: '',
-      email: ''
+      email: '',
+      id: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -33,7 +35,9 @@ class Account extends Component {
     event.preventDefault()
     try {
       await axios.put('/api/users/account', this.state)
+      toastr.success('Success: Your Account info has been modified.')
     } catch (err) {
+      toastr.err(err)
       console.error(err)
     }
   }
@@ -51,8 +55,7 @@ class Account extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className="form-container">
             <label className="form-row">
-              First Name
-              <input
+              First Name<input
                 onChange={this.handleChange}
                 name="firstName"
                 type="text"
@@ -61,8 +64,7 @@ class Account extends Component {
               />
             </label>
             <label className="form-row">
-              Last Name
-              <input
+              Last Name<input
                 onChange={this.handleChange}
                 name="lastName"
                 type="text"
@@ -71,8 +73,7 @@ class Account extends Component {
               />
             </label>
             <label className="form-row">
-              Email
-              <input
+              Email<input
                 onChange={this.handleChange}
                 name="email"
                 type="email"
@@ -81,23 +82,12 @@ class Account extends Component {
               />
             </label>
           </div>
-          <button
-            type="submit"
-            style={{
-              float: 'right',
-              marginRight: '7px'
-            }}
-          >
-            {' '}
-            Save Changes
-          </button>
+          <button type="submit"> Save Changes</button>
         </form>
       </div>
     )
   }
 }
-
-import {submitEditedUser} from '../store/user'
 
 function mapStateToProps(state) {
   return {
@@ -105,10 +95,4 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    editUser: newuseredit => dispatch(submitEditedUser(newuseredit))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Account)
+export default connect(mapStateToProps)(Account)
