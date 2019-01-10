@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import toastr from 'toastr'
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class SingleProduct extends Component {
       categoryChosen: ''
     }
     this.handleSelect = this.handleSelect.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   async componentDidMount() {
@@ -18,12 +20,37 @@ class SingleProduct extends Component {
     const {data} = await axios.get(`/api/products/${id}`)
     this.setState(data)
     this.setState({loading: false})
+    console.log(this.state)
   }
 
-  handleSelect(evt) {
-    this.setState({
+  async handleSelect(evt) {
+    await this.setState({
       [evt.target.name]: evt.target.value
     })
+    console.log(this.state)
+  }
+
+  handleSubmit(evt) {
+    evt.preventDefault()
+    try {
+      //const value = this.name
+      let item = {
+        name: this.state.name,
+        id: this.state.id,
+        sizeChosen: this.state.sizeChosen,
+        colorChosen: this.state.colorChosen,
+        categoryChosen: this.state.categoryChosen,
+        qty: 3
+        //this.qty Waiting on a quantity dropdown
+      }
+      //localStorage.setItem('brug', 'hsdkajhfkjhsdkjfhks')
+      localStorage.setItem(this.state.id, JSON.stringify(item))
+      console.log(item)
+      toastr.success('Success: Your Account info has been modified.')
+    } catch (err) {
+      toastr.err(err)
+      console.error(err)
+    }
   }
 
   render() {
@@ -31,6 +58,7 @@ class SingleProduct extends Component {
     const size = product.sizes
     const color = product.color
     const category = product.category
+    const objects = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
     if (this.state.loading) {
       return <div />
     }
@@ -71,12 +99,17 @@ class SingleProduct extends Component {
           aria-required="true"
         >
           <option>color</option>
-          {color.map((color, idx) => {
-            return <option key={idx}>{color}</option>
+        </select>
+        <select name="qty" onChange={this.handleSelect} aria-required="true">
+          <option>quantity</option>
+          {objects.map((object, idx) => {
+            return <option key={idx}>{object}</option>
           })}
         </select>
         <div>
-          <button type="button">ADD TO CART</button>
+          <button type="submit" onClick={this.handleSubmit}>
+            ADD TO CART
+          </button>
           <button type="button">VIEW CART</button>
           <button type="button">CONTINUE SHOPPING</button>
         </div>
