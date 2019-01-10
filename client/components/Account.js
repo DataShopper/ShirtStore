@@ -31,9 +31,11 @@ class Account extends Component {
 
   async handleSubmit(event) {
     event.preventDefault()
-    await axios.put('/api/users/account', this.state)
-
-    //this.props.history.push('/students');
+    try {
+      await axios.put('/api/users/account', this.state)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   render() {
