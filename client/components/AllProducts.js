@@ -55,6 +55,12 @@ const mapStateToProps = state => {
   }
 }
 
+// OB/MS: fun shorthand object form for mapDispatchToProps; this shorthand works when you have a mapDispatchToProps function that returns an object where each key is a method that calls a thunk and dispatches it. Such a common pattern that redux allows a shorthand
+/*
+const mapDispatchToProps = {
+  retrieveData: fetchProducts
+};
+*/
 const mapDispatchToProps = dispatch => {
   return {
     retrieveData: () => dispatch(fetchProducts())

@@ -2,6 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('order', {
+  // OB/MS: undead code
   shirts: {
     type: Sequelize.ARRAY(Sequelize.INTEGER),
     defaultValue: []

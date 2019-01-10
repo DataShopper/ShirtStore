@@ -2,6 +2,7 @@ const router = require('express').Router()
 const {Product} = require('../db/models')
 const session = require('express-session')
 
+// OB/MS: don't need this, can use existing `req.session.id` if you need it
 router.use(
   session({
     genid: req => {
@@ -15,6 +16,7 @@ router.use(
 //Get all products /api/products
 router.get('/', async (req, res, next) => {
   try {
+    // OB/MS: chop these logs! before they make it into master
     console.log('HELLO', req.session.user)
     const products = await Product.findAll()
     res.json(products)
@@ -25,6 +27,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:productId', async (req, res, next) => {
   try {
+    // OB/MS: drop the s
     const products = await Product.findById(req.params.productId)
     res.json(products)
   } catch (err) {

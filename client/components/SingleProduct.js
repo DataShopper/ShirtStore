@@ -9,6 +9,7 @@ class SingleProduct extends Component {
     this.state = {
       loading: true
     }
+    // OB/MS: could use a class arrow method instead of binding (make sure you have the relevant babel stuff if it doesn't work)
     this.dropdownMenu = this.dropdownMenu.bind(this)
   }
 

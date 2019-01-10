@@ -10,6 +10,7 @@ const Product = db.define('product', {
     }
   },
 
+  // OB/MS: math and decimals are the worst (in Javascript especially) because of rounding errors in floating point math, instead the standard for currency data is to measure in cents (so use INTEGER)
   price: {
     allowNull: false,
     type: Sequelize.DECIMAL(10, 2),
@@ -36,6 +37,7 @@ const Product = db.define('product', {
 
   imageUrl: {
     type: Sequelize.STRING,
+    // OB/MS: caution with relative URLs, instead default to absolute URLs
     defaultValue: 'defaultImage1.jpeg'
   },
 
