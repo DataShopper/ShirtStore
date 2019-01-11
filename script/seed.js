@@ -17,7 +17,7 @@ async function seed() {
     User.create({
       firstName: 'Omri',
       lastName: 'Bernstein',
-      role: 'user',
+      admin: true,
       address: '555 FullStack Dr.',
       email: 'cody@email.com',
       password: '123'
@@ -25,7 +25,7 @@ async function seed() {
     User.create({
       firstName: 'Molly',
       lastName: 'Seeley',
-      role: 'user',
+      admin: false,
       address: '999 FullStack Dr.',
       email: 'murphy@email.com',
       password: '123'
@@ -63,131 +63,90 @@ async function seed() {
     Product.create({
       name: 'Funky Shirt',
       price: 995,
-      sizes: ['S', 'M'],
+      sizes: 'S, M',
       style: 'funky',
       count: 12,
-      color: [
-        'Red',
-        'Blue',
-        'Black',
-        'Green',
-        'Gold',
-        'Orange',
-        'Pink',
-        'Grey',
-        'Purple'
-      ],
+      color: 'Red, Blue, Black, Green, Gold, Orange, Pink, Grey, Purple',
       imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is funky and you love funky.',
-      category: ['Women', 'Men', 'Children']
+      category: 'Women, Men, Children'
     }),
     Product.create({
       name: 'Wacky Shirt',
       price: 895,
-      sizes: ['S', 'M', 'L'],
+      sizes: 'M, L',
       style: 'wacky',
       count: 15,
-      color: ['Orange', 'Pink', 'Grey', 'Yellow', 'Purple'],
+      color: 'Orange, Pink, Grey, Yellow, Purple',
       imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is seriously wacky.',
-      category: ['Women', 'Men', 'Children']
+      category: 'Women, Men, Children'
     }),
     Product.create({
       name: 'Boring Shirt',
       price: 595,
-      sizes: ['S', 'M', 'L'],
+      sizes: 'S, M, L',
       style: 'boring',
       count: 20,
-      color: ['Orange', 'Pink', 'Grey', 'Yellow', 'Purple'],
+      color: 'Orang, Pink, Grey, Yellow, Purple',
       imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is boring.',
-      category: ['Women', 'Men', 'Children']
+      category: 'Women, Men, Children'
     }),
     Product.create({
       name: 'Really Bad Shirt',
       price: 495,
-      sizes: ['S', 'M', 'L'],
+      sizes: 'S, M, L',
       style: 'bad',
       count: 25,
-      color: [
-        'Red',
-        'Blue',
-        'Black',
-        'Green',
-        'Gold',
-        'Grey',
-        'Yellow',
-        'Purple'
-      ],
+      color: 'Red, Gold, Blue, Green, Yellow, Pink, Rose',
       imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is really bad.',
-      category: ['Men', 'Children']
+      category: 'Men, Children'
     }),
     Product.create({
       name: 'Expensive Shirt',
       price: 9995,
-      sizes: ['S', 'L'],
+      sizes: 'S, L',
       style: 'expensive',
       count: 10,
-      color: ['Black', 'Gold'],
+      color: 'Black, Gold',
       imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is really pricey.',
-      category: ['Women', 'Men']
+      category: 'Women, Men'
     }),
     Product.create({
       name: 'Smelly Shirt',
       price: 395,
-      sizes: ['S', 'M', 'L'],
+      sizes: 'S, M, L',
       style: 'smelly',
       count: 5,
-      color: [
-        'Red',
-        'Blue',
-        'Black',
-        'Green',
-        'Gold',
-        'Orange',
-        'Pink',
-        'Grey',
-        'Yellow',
-        'Purple'
-      ],
+      color: 'Red, Gold, Blue, Green, Purple, Yellow',
       imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is really smelly.',
-      category: ['Women', 'Men', 'Children']
+      category: 'Women, Men, Children'
     }),
     Product.create({
       name: 'Pretty Shirt',
       price: 2995,
-      sizes: ['S', 'M'],
+      sizes: 'S, M',
       style: 'pretty',
       count: 26,
-      color: [
-        'Red',
-        'Blue',
-        'Black',
-        'Green',
-        'Gold',
-        'Orange',
-        'Pink',
-        'Grey',
-        'Yellow',
-        'Purple'
-      ],
+      color: 'Red, Gold, Blue, Green, Black, White',
       imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is pretty.',
-      category: ['Women', 'Children']
+      category: 'Women, Children'
     }),
     Product.create({
       name: 'Special Shirt',
       price: 3995,
-      sizes: ['S', 'M', 'L'],
+      sizes: 'S, M, L',
       style: 'funkyspecial',
       count: 3,
-      color: ['Red', 'Gold', 'Orange', 'Pink', 'Grey', 'Yellow', 'Purple'],
+      color: 'Red, Gold, Blue, Green',
       imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is special. Stock is limited.',
-      category: ['Women', 'Men', 'Children']
+      category: 'Women, Men, Children'
     })
   ])
 
