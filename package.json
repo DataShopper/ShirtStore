@@ -46,6 +46,7 @@
     "gulp-util": "^3.0.8",
     "history": "^4.6.3",
     "jquery": "^3.3.1",
+    "local-storage": "^1.4.2",
     "morgan": "^1.9.1",
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",
@@ -67,7 +68,8 @@
     "sequelize": "^4.38.0",
     "socket.io": "^2.1.1",
     "style-loader": "^0.23.1",
-    "url-loader": "^1.1.2"
+    "url-loader": "^1.1.2",
+    "toastr": "^2.1.4"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.55",

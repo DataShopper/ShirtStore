@@ -24,12 +24,9 @@ const User = db.define('user', {
       notEmpty: true
     }
   },
-  role: {
-    type: Sequelize.STRING,
-    validate: {
-      isIn: [['user', 'admin', 'guest']]
-    },
-    defaultValue: 'guest'
+  admin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   },
   email: {
     type: Sequelize.STRING,

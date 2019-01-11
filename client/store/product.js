@@ -4,6 +4,7 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const PRODUCTS = 'PRODUCTS'
+const ADD_PRODUCT = 'ADD_PRODUCT'
 
 /**
  * ACTION CREATORS
@@ -13,9 +14,25 @@ export const getProducts = products => ({
   products
 })
 
+export const addProduct = product => ({
+  type: ADD_PRODUCT,
+  product
+})
 /**
  * THUNK CREATORS
  */
+
+export const addOneProduct = product => async dispatch => {
+  try {
+    console.log('hello', product)
+    const {data} = await axios.post('/api/products', product)
+    console.log('data', data)
+    dispatch(addProduct(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const fetchProducts = () => async dispatch => {
   try {
     const res = await axios.get('/api/products')
@@ -32,6 +49,9 @@ const products = (state = [], action) => {
   switch (action.type) {
     case PRODUCTS:
       return action.products
+    case ADD_PRODUCT:
+      const product = action.product
+      return [...state, product]
     default:
       return state
   }

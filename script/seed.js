@@ -17,7 +17,7 @@ async function seed() {
     User.create({
       firstName: 'Omri',
       lastName: 'Bernstein',
-      role: 'user',
+      admin: true,
       address: '555 FullStack Dr.',
       email: 'cody@email.com',
       password: '123'
@@ -25,7 +25,7 @@ async function seed() {
     User.create({
       firstName: 'Molly',
       lastName: 'Seeley',
-      role: 'user',
+      admin: false,
       address: '999 FullStack Dr.',
       email: 'murphy@email.com',
       password: '123'
@@ -36,25 +36,25 @@ async function seed() {
     Order.create({
       shirts: [6],
       bought: false,
-      totalPrice: 2.0,
+      totalPrice: 200,
       userId: 1
     }),
     Order.create({
       shirts: [5],
       bought: false,
-      totalPrice: 5.0,
+      totalPrice: 500,
       userId: 2
     }),
     Order.create({
       shirts: [2],
       bought: true,
-      totalPrice: 3.0,
+      totalPrice: 300,
       userId: 1
     }),
     Order.create({
       shirts: [3],
       bought: true,
-      totalPrice: 7.0,
+      totalPrice: 700,
       userId: 2
     })
   ])
@@ -62,132 +62,91 @@ async function seed() {
   const products = await Promise.all([
     Product.create({
       name: 'Funky Shirt',
-      price: 9.95,
-      sizes: ['S', 'M'],
+      price: 995,
+      sizes: 'S, M',
       style: 'funky',
       count: 12,
-      color: [
-        'Red',
-        'Blue',
-        'Black',
-        'Green',
-        'Gold',
-        'Orange',
-        'Pink',
-        'Grey',
-        'Purple'
-      ],
+      color: 'Red, Blue, Black, Green, Gold, Orange, Pink, Grey, Purple',
       imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is funky and you love funky.',
-      category: ['Women', 'Men', 'Children']
+      category: 'Women, Men, Children'
     }),
     Product.create({
       name: 'Wacky Shirt',
-      price: 8.95,
-      sizes: ['S', 'M', 'L'],
+      price: 895,
+      sizes: 'M, L',
       style: 'wacky',
       count: 15,
-      color: ['Orange', 'Pink', 'Grey', 'Yellow', 'Purple'],
+      color: 'Orange, Pink, Grey, Yellow, Purple',
       imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is seriously wacky.',
-      category: ['Women', 'Men', 'Children']
+      category: 'Women, Men, Children'
     }),
     Product.create({
       name: 'Boring Shirt',
-      price: 5.95,
-      sizes: ['S', 'M', 'L'],
+      price: 595,
+      sizes: 'S, M, L',
       style: 'boring',
       count: 20,
-      color: ['Orange', 'Pink', 'Grey', 'Yellow', 'Purple'],
+      color: 'Orang, Pink, Grey, Yellow, Purple',
       imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is boring.',
-      category: ['Women', 'Men', 'Children']
+      category: 'Women, Men, Children'
     }),
     Product.create({
       name: 'Really Bad Shirt',
-      price: 4.95,
-      sizes: ['S', 'M', 'L'],
+      price: 495,
+      sizes: 'S, M, L',
       style: 'bad',
       count: 25,
-      color: [
-        'Red',
-        'Blue',
-        'Black',
-        'Green',
-        'Gold',
-        'Grey',
-        'Yellow',
-        'Purple'
-      ],
+      color: 'Red, Gold, Blue, Green, Yellow, Pink, Rose',
       imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is really bad.',
-      category: ['Men', 'Children']
+      category: 'Men, Children'
     }),
     Product.create({
       name: 'Expensive Shirt',
-      price: 99.95,
-      sizes: ['S', 'L'],
+      price: 9995,
+      sizes: 'S, L',
       style: 'expensive',
       count: 10,
-      color: ['Black', 'Gold'],
+      color: 'Black, Gold',
       imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is really pricey.',
-      category: ['Women', 'Men']
+      category: 'Women, Men'
     }),
     Product.create({
       name: 'Smelly Shirt',
-      price: 3.95,
-      sizes: ['S', 'M', 'L'],
+      price: 395,
+      sizes: 'S, M, L',
       style: 'smelly',
       count: 5,
-      color: [
-        'Red',
-        'Blue',
-        'Black',
-        'Green',
-        'Gold',
-        'Orange',
-        'Pink',
-        'Grey',
-        'Yellow',
-        'Purple'
-      ],
+      color: 'Red, Gold, Blue, Green, Purple, Yellow',
       imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is really smelly.',
-      category: ['Women', 'Men', 'Children']
+      category: 'Women, Men, Children'
     }),
     Product.create({
       name: 'Pretty Shirt',
-      price: 29.95,
-      sizes: ['S', 'M'],
+      price: 2995,
+      sizes: 'S, M',
       style: 'pretty',
       count: 26,
-      color: [
-        'Red',
-        'Blue',
-        'Black',
-        'Green',
-        'Gold',
-        'Orange',
-        'Pink',
-        'Grey',
-        'Yellow',
-        'Purple'
-      ],
+      color: 'Red, Gold, Blue, Green, Black, White',
       imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is pretty.',
-      category: ['Women', 'Children']
+      category: 'Women, Children'
     }),
     Product.create({
       name: 'Special Shirt',
-      price: 39.95,
-      sizes: ['S', 'M', 'L'],
+      price: 3995,
+      sizes: 'S, M, L',
       style: 'funkyspecial',
       count: 3,
-      color: ['Red', 'Gold', 'Orange', 'Pink', 'Grey', 'Yellow', 'Purple'],
+      color: 'Red, Gold, Blue, Green',
       imageUrl: '/defaultImage1.jpeg',
       description: 'This shirt is special. Stock is limited.',
-      category: ['Women', 'Men', 'Children']
+      category: 'Women, Men, Children'
     })
   ])
 
@@ -195,7 +154,7 @@ async function seed() {
     OrderDetail.create({
       productId: 6,
       quantity: 2,
-      totalPrice: 8.9,
+      totalPrice: 890,
       size: 'Large',
       color: 'black',
       orderId: 3
@@ -203,7 +162,7 @@ async function seed() {
     OrderDetail.create({
       productId: 2,
       quantity: 2,
-      totalPrice: 18.9,
+      totalPrice: 1890,
       size: 'Large',
       color: 'black',
       orderId: 3
@@ -211,7 +170,7 @@ async function seed() {
     OrderDetail.create({
       productId: 4,
       quantity: 2,
-      totalPrice: 9.9,
+      totalPrice: 990,
       size: 'Large',
       color: 'black',
       orderId: 4

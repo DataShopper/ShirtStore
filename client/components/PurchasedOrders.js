@@ -41,10 +41,8 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getPurchasedOrders: userId => dispatch(getPurchasedOrders(userId))
-  }
+const mapDispatchToProps = {
+  getPurchasedOrders: getPurchasedOrders
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PurchasedOrders)
