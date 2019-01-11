@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchProducts, addOneProduct} from '../store'
-import {Link} from 'react-router-dom'
+import {fetchProducts, addOneProduct, removeProduct} from '../store'
 import ProductComponent from './ProductComponent'
 
 class AllProducts extends Component {
@@ -12,6 +11,11 @@ class AllProducts extends Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.removed = this.removed.bind(this)
+  }
+
+  async removed(product) {
+    await this.props.remove(product)
   }
 
   async componentDidMount() {
@@ -23,7 +27,6 @@ class AllProducts extends Component {
     await this.setState({
       [evt.target.name]: evt.target.value
     })
-    console.log('state', this.state)
   }
 
   async handleSubmit(evt) {
@@ -48,10 +51,9 @@ class AllProducts extends Component {
     return (
       <div>
         <ProductComponent
-          state={this.props}
-          user={user}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
+          removed={this.removed}
         />
       </div>
     )
@@ -67,7 +69,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   retrieveData: fetchProducts,
-  addOne: addOneProduct
+  addOne: addOneProduct,
+  remove: removeProduct
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)

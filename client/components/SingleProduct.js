@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
-import axios from 'axios'
 import toastr from 'toastr'
+import {connect} from 'react-redux'
+import {removeProduct, oneItem} from '../store'
+import {Link} from 'react-router-dom'
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -17,8 +19,7 @@ class SingleProduct extends Component {
 
   async componentDidMount() {
     const id = this.props.match.params.productId
-    const {data} = await axios.get(`/api/products/${id}`)
-    this.setState(data)
+    await this.props.oneProduct(id)
     this.setState({loading: false})
   }
 
@@ -32,14 +33,17 @@ class SingleProduct extends Component {
     evt.preventDefault()
     try {
       let item = {
-        name: this.state.name,
-        id: this.state.id,
-        sizeChosen: this.state.sizeChosen,
-        colorChosen: this.state.colorChosen,
-        categoryChosen: this.state.categoryChosen,
-        qty: this.state.qty
+        name: this.props.name,
+        id: this.props.singleItem.id,
+        size: this.state.sizeChosen,
+        price: this.props.singleItem.price,
+        color: this.state.colorChosen,
+        category: this.state.categoryChosen,
+        quantity: this.state.quantity,
+        style: this.props.singleItem.style,
+        imageUrl: this.props.singleItem.imageUrl
       }
-      localStorage.setItem(this.state.id, JSON.stringify(item))
+      localStorage.setItem(this.props.singleItem.id, JSON.stringify(item))
       toastr.success('Success: Your shopping cart has been updated.')
     } catch (err) {
       toastr.err(err)
@@ -48,10 +52,12 @@ class SingleProduct extends Component {
   }
 
   render() {
-    const product = this.state
+    const admin = this.props.user.admin
+    const product = this.props.singleItem || {}
     const size = product.sizes
     const color = product.color
     const category = product.category
+    const removed = this.props.removed
     const objects = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
     if (this.state.loading) {
       return <div />
@@ -63,12 +69,8 @@ class SingleProduct extends Component {
         <p>{product.price}</p>
         <img src={product.imageUrl} />
         <p>{product.description}</p>
-        <select
-          name="sizeChosen"
-          onChange={this.handleSelect}
-          aria-required="true"
-        >
-          <option>size</option>
+        <select name="sizeChosen" onChange={this.handleSelect} required>
+          <option>--</option>
           {size.map((size, idx) => {
             return (
               <option key={idx} name="sizeChosen">
@@ -77,36 +79,24 @@ class SingleProduct extends Component {
             )
           })}
         </select>
-        <select
-          name="categoryChosen"
-          onChange={this.handleSelect}
-          aria-required="true"
-        >
-          <option>category</option>
+        <select name="categoryChosen" onChange={this.handleSelect} required>
+          <option>--</option>
           {category.map((category, idx) => {
             return <option key={idx}>{category}</option>
           })}
         </select>
-        <select
-          name="colorChosen"
-          onChange={this.handleSelect}
-          aria-required="true"
-        >
-          <option>color</option>
+        <select name="colorChosen" onChange={this.handleSelect} required>
+          <option>--</option>
           {color.map((color, idx) => {
             return (
-              <option
-                key={idx}
-                onChange={this.handleSelect}
-                aria-required="true"
-              >
+              <option key={idx} onChange={this.handleSelect} required>
                 {color}
               </option>
             )
           })}
         </select>
-        <select name="qty" onChange={this.handleSelect} aria-required="true">
-          <option>quantity</option>
+        <select name="qty" onChange={this.handleSelect} required>
+          <option />
           {objects.map((object, idx) => {
             return <option key={idx}>{object}</option>
           })}
@@ -118,9 +108,26 @@ class SingleProduct extends Component {
           <button type="button">VIEW CART</button>
           <button type="button">CONTINUE SHOPPING</button>
         </div>
+        {admin && (
+          <button type="button" onClick={() => removed(product)}>
+            <Link to="/home"> Remove</Link>
+          </button>
+        )}
       </div>
     )
   }
 }
 
-export default SingleProduct
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    singleItem: state.singleProduct
+  }
+}
+
+const mapDispatchToProps = {
+  removed: removeProduct,
+  oneProduct: oneItem
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
