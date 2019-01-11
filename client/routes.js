@@ -8,6 +8,7 @@ import {
   Login,
   Signup,
   UserHome,
+  Cart,
   AllProducts,
   Account,
   PurchasedOrders
@@ -37,6 +38,7 @@ class Routes extends Component {
             <Route exact path="/products" component={AllProducts} />
             <Route path="/products/:productId" component={SingleProduct} />
             <Route path="/account" component={Account} />
+            <Route path="/cart" component={Cart} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
