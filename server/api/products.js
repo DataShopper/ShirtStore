@@ -4,6 +4,7 @@ const {Product} = require('../db/models')
 //Get all products /api/products
 router.get('/', async (req, res, next) => {
   try {
+    console.log(req.user)
     const products = await Product.findAll()
     res.json(products)
   } catch (err) {
@@ -13,10 +14,12 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    console.log('boooodddyyy', req.body)
-    const product = await Product.create(req.body)
-    console.log('product', product)
-    res.json(product)
+    if (req.user.admin) {
+      const product = await Product.create(req.body)
+      res.json(product)
+    } else {
+      res.sendStatus(401)
+    }
   } catch (err) {
     next(err)
   }
