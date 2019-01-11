@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchProducts} from '../store'
-import {Link, Redirect} from 'react-router-dom'
+import {fetchProducts, addOneProduct} from '../store'
+import {Link} from 'react-router-dom'
+import ProductComponent from './ProductComponent'
 
 class AllProducts extends Component {
   constructor(props) {
@@ -9,19 +10,30 @@ class AllProducts extends Component {
     this.state = {
       loading: true
     }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   async componentDidMount() {
-    // if (!this.props.user.id) {
-    //   this.history.push('/guestHome')
-    // }
     this.setState({loading: false})
     await this.props.retrieveData()
   }
 
+  async handleChange(evt) {
+    await this.setState({
+      [evt.target.name]: evt.target.value
+    })
+    console.log('state', this.state)
+  }
+
+  async handleSubmit(evt) {
+    evt.preventDefault()
+    await this.props.addOne(this.state)
+  }
+
   render() {
-    const products = this.props.product || []
-    const user = this.props.user || {}
+    const products = this.props.products || []
+    const user = this.props.user
     if (this.state.loading) {
       return <div />
     }
@@ -33,41 +45,14 @@ class AllProducts extends Component {
         </div>
       )
     }
-
-    if (!user.id) {
-      return (
-        <div>
-          <Redirect to="/home" />
-          {products.map(p => {
-            return (
-              <Link to={`/products/${p.id}`} key={p.id}>
-                <div>
-                  <p>{p.name}</p>
-                  <p>{p.price}</p>
-                  <img src={p.imageUrl} />
-                  <p>{p.description}</p>
-                </div>
-              </Link>
-            )
-          })}
-        </div>
-      )
-    }
-
     return (
       <div>
-        {products.map(p => {
-          return (
-            <Link to={`/products/${p.id}`} key={p.id}>
-              <div>
-                <p>{p.name}</p>
-                <p>{p.price}</p>
-                <img src={p.imageUrl} />
-                <p>{p.description}</p>
-              </div>
-            </Link>
-          )
-        })}
+        <ProductComponent
+          state={this.props}
+          user={user}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+        />
       </div>
     )
   }
@@ -75,13 +60,14 @@ class AllProducts extends Component {
 
 const mapStateToProps = state => {
   return {
-    product: state.products,
+    products: state.products,
     user: state.user
   }
 }
 
 const mapDispatchToProps = {
-  retrieveData: fetchProducts
+  retrieveData: fetchProducts,
+  addOne: addOneProduct
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
