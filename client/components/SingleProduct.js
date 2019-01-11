@@ -40,7 +40,7 @@ class SingleProduct extends Component {
         qty: this.state.qty
       }
       localStorage.setItem(this.state.id, JSON.stringify(item))
-      toastr.success('Success: Your Account info has been modified.')
+      toastr.success('Success: Your shopping cart has been updated.')
     } catch (err) {
       toastr.err(err)
       console.error(err)
