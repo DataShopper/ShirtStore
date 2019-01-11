@@ -1,5 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import {Button} from 'semantic-ui-react'
+import {Input} from 'semantic-ui-react'
+import 'semantic-ui-css/semantic.min.css'
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -36,16 +39,13 @@ class SingleProduct extends Component {
     }
 
     return (
-      <div>
+      <div className="ui raised very padded text container segment">
         <p>{product.name}</p>
         <p>{product.price}</p>
         <img src={product.imageUrl} />
         <p>{product.description}</p>
-        <select
-          name="sizeChosen"
-          onChange={this.handleSelect}
-          aria-required="true"
-        >
+        <Input list="size" placeholder="SIZE" />
+        <datalist id="size">
           <option>size</option>
           {size.map((size, idx) => {
             return (
@@ -54,7 +54,9 @@ class SingleProduct extends Component {
               </option>
             )
           })}
-        </select>
+        </datalist>
+        <i className="large chess rook icon" />
+        <Input list="category" placeholder="CATEGORY" />
         <select
           name="categoryChosen"
           onChange={this.handleSelect}
@@ -76,9 +78,9 @@ class SingleProduct extends Component {
           })}
         </select>
         <div>
-          <button type="button">ADD TO CART</button>
-          <button type="button">VIEW CART</button>
-          <button type="button">CONTINUE SHOPPING</button>
+          <Button type="button">ADD TO CART</Button>
+          <Button type="button">VIEW CART</Button>
+          <Button type="button">CONTINUE SHOPPING</Button>
         </div>
       </div>
     )

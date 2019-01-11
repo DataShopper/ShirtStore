@@ -25,22 +25,15 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'resolve-url-loader'],
-        include: [path.join(__dirname, 'src'), /node_modules/]
+        loaders: ['style-loader', 'css-loader']
       },
       {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-        loader: require.resolve('url-loader'),
+        test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
+        loader: 'file-loader',
         options: {
-          limit: 10000,
-          name: 'static/media/[name].[hash:8].[ext]'
-        }
-      },
-      {
-        test: [/\.eot$/, /\.ttf$/, /\.svg$/, /\.woff$/, /\.woff2$/],
-        loader: require.resolve('file-loader'),
-        options: {
-          name: '/static/media/[name].[hash:8].[ext]'
+          name: '[name].[hash:8].[ext]',
+          outputPath: 'static/media/',
+          publicPath: '/'
         }
       }
     ]
