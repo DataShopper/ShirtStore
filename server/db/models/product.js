@@ -57,7 +57,7 @@ const Product = db.define(
       beforeCreate: product => {
         product.color = product.color.replace(/,/g, '').split(' ')
         product.sizes = product.sizes.replace(/,/g, '').split(' ')
-        // product.category = product.category.replace(/,/g, '').split(' ') || ''
+        product.category = product.category.replace(/,/g, '').split(' ') || ''
         const price = product.price / 100
         console.log('price', price)
         product.price = price
