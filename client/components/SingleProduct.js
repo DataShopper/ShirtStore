@@ -1,10 +1,13 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import toastr from 'toastr'
+import {connect} from 'react-redux'
+import {removeProduct} from '../store'
+import {Link} from 'react-router-dom'
 
 class SingleProduct extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.state = {
       loading: true,
       sizeChosen: '',
@@ -48,10 +51,12 @@ class SingleProduct extends Component {
   }
 
   render() {
+    const admin = this.props.user.admin
     const product = this.state
     const size = product.sizes
     const color = product.color
     const category = product.category
+    const removed = this.props.removed
     const objects = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
     if (this.state.loading) {
       return <div />
@@ -118,9 +123,24 @@ class SingleProduct extends Component {
           <button type="button">VIEW CART</button>
           <button type="button">CONTINUE SHOPPING</button>
         </div>
+        {admin && (
+          <button type="button" onClick={() => removed(product)}>
+            <Link to="/home"> Remove</Link>
+          </button>
+        )}
       </div>
     )
   }
 }
 
-export default SingleProduct
+const MapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = {
+  removed: removeProduct
+}
+
+export default connect(MapStateToProps, mapDispatchToProps)(SingleProduct)
