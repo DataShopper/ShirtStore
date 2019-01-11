@@ -80,10 +80,8 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    retrieveData: () => dispatch(fetchProducts())
-  }
+const mapDispatchToProps = {
+  retrieveData: fetchProducts
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)

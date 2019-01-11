@@ -7,7 +7,7 @@ const OrderDetail = db.define('orderdetail', {
     allowNull: false
   },
   totalPrice: {
-    type: Sequelize.DECIMAL(10, 2),
+    type: Sequelize.INTEGER,
     defaultValue: null
   },
   size: {
