@@ -17,4 +17,14 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.post('/', async (req, res, next) => {
+  try {
+    const cart = req.body
+    // const orderTotal = Object.keys(cart).reduce(cartItem => cartItem.quantity
+    // order.se
+  } catch (error) {
+    next(error)
+  }
+})
+
 module.exports = router

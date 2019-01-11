@@ -7,6 +7,7 @@ class Cart extends Component {
     this.state = {
       cart: []
     }
+    this.removeCartItem = this.removeCartItem.bind(this)
   }
 
   componentDidMount() {
@@ -33,17 +34,34 @@ class Cart extends Component {
     this.setState({cart})
   }
 
+  removeCartItem(productId) {
+    if (localStorage.length > 0) {
+      localStorage.removeItem(productId) // Remove item from both localStorage and component state
+      const cart = this.state.cart.filter(cartItem => productId !== cartItem.id)
+      this.setState({cart})
+    }
+  }
+
   render() {
     const {cart} = this.state
     return (
       <div>
         {cart.map(cartItem => (
-          <li key={cartItem.id}>
-            <Link to={`/products/${cartItem.id}`}>{cartItem.name}</Link>
-            <ul>{`Quantity: ${cartItem.qty}`}</ul>
-            <ul>{`Color: ${cartItem.colorChosen}`}</ul>
-            <ul>{`Size: ${cartItem.sizeChosen}`}</ul>
-          </li>
+          <div key={cartItem.id}>
+            <li>
+              <Link to={`/products/${cartItem.id}`}>{cartItem.name}</Link>
+              <ul>{`Quantity: ${cartItem.qty}`}</ul>
+              <ul>{`Color: ${cartItem.colorChosen}`}</ul>
+              <ul>{`Size: ${cartItem.sizeChosen}`}</ul>
+            </li>
+            <button
+              onClick={() => {
+                this.removeCartItem(cartItem.id)
+              }}
+            >
+              Remove
+            </button>
+          </div>
         ))}
       </div>
     )
