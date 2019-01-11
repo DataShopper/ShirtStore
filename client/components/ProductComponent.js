@@ -1,8 +1,9 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 
-const ProducComponent = props => {
-  const products = props.state.products || []
+const ProductComponent = props => {
+  const products = props.allProducts || []
   const admin = props.user.admin
   const {handleSubmit, handleChange, removed} = props
   return (
@@ -81,4 +82,12 @@ const ProducComponent = props => {
   )
 }
 
-export default ProducComponent
+const mapStateToProps = state => {
+  return {
+    product: state.singleProduct,
+    user: state.user,
+    allProducts: state.products
+  }
+}
+
+export default connect(mapStateToProps)(ProductComponent)

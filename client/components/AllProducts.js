@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchProducts, addOneProduct, removeProduct} from '../store'
-import {Link} from 'react-router-dom'
 import ProductComponent from './ProductComponent'
 
 class AllProducts extends Component {
@@ -52,8 +51,6 @@ class AllProducts extends Component {
     return (
       <div>
         <ProductComponent
-          state={this.props}
-          user={user}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           removed={this.removed}
