@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 
 class Cart extends Component {
   constructor(props) {
@@ -33,9 +34,17 @@ class Cart extends Component {
   }
 
   render() {
+    const {cart} = this.state
     return (
       <div>
-        {this.state.cart.map(item => <h1 key={item.id}>{item.name}</h1>)}
+        {cart.map(cartItem => (
+          <li key={cartItem.id}>
+            <Link to={`/products/${cartItem.id}`}>{cartItem.name}</Link>
+            <ul>{`Quantity: ${cartItem.qty}`}</ul>
+            <ul>{`Color: ${cartItem.colorChosen}`}</ul>
+            <ul>{`Size: ${cartItem.sizeChosen}`}</ul>
+          </li>
+        ))}
       </div>
     )
   }
