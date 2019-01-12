@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {UPDATE_PRODUCT} from './single-product'
 
 /**
  * ACTION TYPES
@@ -24,6 +25,7 @@ export const remove = product => ({
   type: REMOVE_PRODUCT,
   product
 })
+
 /**
  * THUNK CREATORS
  */
@@ -48,13 +50,21 @@ export const fetchProducts = () => async dispatch => {
 
 export const removeProduct = product => async dispatch => {
   try {
-    const {data} = await axios.delete(`/api/products/${product.id}`)
+    await axios.delete(`/api/products/${product.id}`)
     dispatch(remove(product))
   } catch (err) {
     console.error(err)
   }
 }
 
+export const replace = (arr, product) => {
+  for (let i = 0; i < arr.length; i++) {
+    if (product.id === arr[i].id) {
+      arr.splice(i, 1, product)
+    }
+  }
+  return arr
+}
 /**
  * REDUCER
  */
@@ -70,6 +80,15 @@ const products = (state = [], action) => {
       const newArr = [...state]
       const arr = newArr.filter(elem => elem.id !== id)
       return arr
+    case UPDATE_PRODUCT:
+      const product2 = action.product
+      product2.color = product2.color.replace(/,/g, '').split(' ')
+      product2.sizes = product2.sizes.replace(/,/g, '').split(' ')
+      product2.category = product2.category.replace(/,/g, '').split(' ')
+      const price = product2.price / 100
+      product2.price = price
+      const arr2 = [...state]
+      return replace(arr2, product2)
     default:
       return state
   }

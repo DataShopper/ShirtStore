@@ -24,9 +24,22 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+router.put('/:productId', async (req, res, next) => {
+  try {
+    if (req.user.admin) {
+      const product = await Product.findById(req.params.productId)
+      const updated = await product.update(req.body)
+      res.sendStatus(204)
+    } else {
+      res.sendStatus(401)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/:productId', async (req, res, next) => {
   try {
-    console.log('id', req.params.productId)
     const product = await Product.findById(req.params.productId)
     res.json(product)
   } catch (err) {

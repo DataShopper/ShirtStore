@@ -3,6 +3,7 @@ import toastr from 'toastr'
 import {connect} from 'react-redux'
 import {removeProduct, oneItem} from '../store'
 import {Link} from 'react-router-dom'
+import {UpdateProduct} from './index'
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -54,9 +55,9 @@ class SingleProduct extends Component {
   render() {
     const admin = this.props.user.admin
     const product = this.props.singleItem || {}
-    const size = product.sizes
-    const color = product.color
-    const category = product.category
+    const size = product.sizes || []
+    const color = product.color || []
+    const category = product.category || []
     const removed = this.props.removed
     const objects = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
     if (this.state.loading) {
@@ -65,8 +66,9 @@ class SingleProduct extends Component {
 
     return (
       <div>
+        {admin && <UpdateProduct />}
         <p>{product.name}</p>
-        <p>{product.price}</p>
+        <p>${product.price}</p>
         <img src={product.imageUrl} />
         <p>{product.description}</p>
         <select name="sizeChosen" onChange={this.handleSelect} required>

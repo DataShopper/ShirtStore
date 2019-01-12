@@ -60,6 +60,13 @@ const Product = db.define(
         product.category = product.category.replace(/,/g, '').split(' ')
         const price = product.price / 100
         product.price = price
+      },
+      beforeUpdate: product => {
+        product.color = product.color.replace(/,/g, '').split(' ')
+        product.sizes = product.sizes.replace(/,/g, '').split(' ')
+        product.category = product.category.replace(/,/g, '').split(' ')
+        const price = product.price / 100
+        product.price = price
       }
     }
   }
