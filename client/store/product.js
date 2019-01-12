@@ -24,9 +24,7 @@ export const addProduct = product => ({
 
 export const addOneProduct = product => async dispatch => {
   try {
-    console.log('hello', product)
     const {data} = await axios.post('/api/products', product)
-    console.log('data', data)
     dispatch(addProduct(data))
   } catch (err) {
     console.error(err)
