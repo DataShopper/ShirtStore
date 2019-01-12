@@ -37,7 +37,9 @@ class Cart extends Component {
   removeCartItem(productId) {
     if (localStorage.length > 0) {
       localStorage.removeItem(productId) // Remove item from both localStorage and component state
-      const cart = this.state.cart.filter(cartItem => productId !== cartItem.id)
+      const cart = this.state.cart.filter(
+        cartItem => productId !== cartItem.productId
+      )
       this.setState({cart})
     }
   }
@@ -47,16 +49,18 @@ class Cart extends Component {
     return (
       <div>
         {cart.map(cartItem => (
-          <div key={cartItem.id}>
+          <div key={cartItem.productId}>
             <li>
-              <Link to={`/products/${cartItem.id}`}>{cartItem.name}</Link>
-              <ul>{`Quantity: ${cartItem.qty}`}</ul>
-              <ul>{`Color: ${cartItem.colorChosen}`}</ul>
-              <ul>{`Size: ${cartItem.sizeChosen}`}</ul>
+              <Link to={`/products/${cartItem.productId}`}>
+                {cartItem.name}
+              </Link>
+              <ul>{`Quantity: ${cartItem.quantity}`}</ul>
+              <ul>{`Color: ${cartItem.color}`}</ul>
+              <ul>{`Size: ${cartItem.size}`}</ul>
             </li>
             <button
               onClick={() => {
-                this.removeCartItem(cartItem.id)
+                this.removeCartItem(cartItem.productId)
               }}
             >
               Remove

@@ -34,7 +34,7 @@ class SingleProduct extends Component {
     try {
       let item = {
         name: this.props.name,
-        id: this.props.singleItem.id,
+        productId: this.props.singleItem.id,
         size: this.state.sizeChosen,
         price: this.props.singleItem.price,
         color: this.state.colorChosen,
@@ -95,7 +95,7 @@ class SingleProduct extends Component {
             )
           })}
         </select>
-        <select name="qty" onChange={this.handleSelect} required>
+        <select name="quantity" onChange={this.handleSelect} required>
           <option />
           {objects.map((object, idx) => {
             return <option key={idx}>{object}</option>
