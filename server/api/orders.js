@@ -2,6 +2,7 @@ const router = require('express').Router()
 const {Order} = require('../db/models')
 const {OrderDetail} = require('../db/models')
 
+// get all api/orders?userId=5
 router.get('/', async (req, res, next) => {
   try {
     const orders = await Order.findAll({

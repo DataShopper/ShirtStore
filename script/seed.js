@@ -34,25 +34,21 @@ async function seed() {
 
   const orders = await Promise.all([
     Order.create({
-      shirts: [6],
       bought: false,
       totalPrice: 200,
       userId: 1
     }),
     Order.create({
-      shirts: [5],
       bought: false,
       totalPrice: 500,
       userId: 2
     }),
     Order.create({
-      shirts: [2],
       bought: true,
       totalPrice: 300,
       userId: 1
     }),
     Order.create({
-      shirts: [3],
       bought: true,
       totalPrice: 700,
       userId: 2
@@ -185,12 +181,12 @@ async function seed() {
     })
   ])
 
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded ${products.length} products`)
-  console.log(`seeded ${payments.length} payments`)
-  console.log(`seeded ${orders.length} orders`)
-  console.log(`seeded ${orderdetails.length} details`)
-  console.log(`seeded successfully`)
+  // console.log(`seeded ${users.length} users`)
+  // console.log(`seeded ${products.length} products`)
+  // console.log(`seeded ${payments.length} payments`)
+  // console.log(`seeded ${orders.length} orders`)
+  // console.log(`seeded ${orderdetails.length} details`)
+  // console.log(`seeded successfully`)
 }
 
 // We've separated the `seed` function from the `runSeed` function.
