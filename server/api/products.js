@@ -29,6 +29,7 @@ router.put('/:productId', async (req, res, next) => {
     if (req.user.admin) {
       const product = await Product.findById(req.params.productId)
       const updated = await product.update(req.body)
+      console.log(updated)
       res.sendStatus(204)
     } else {
       res.sendStatus(401)

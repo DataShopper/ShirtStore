@@ -82,11 +82,6 @@ const products = (state = [], action) => {
       return arr
     case UPDATE_PRODUCT:
       const product2 = action.product
-      product2.color = product2.color.replace(/,/g, '').split(' ')
-      product2.sizes = product2.sizes.replace(/,/g, '').split(' ')
-      product2.category = product2.category.replace(/,/g, '').split(' ')
-      const price = product2.price / 100
-      product2.price = price
       const arr2 = [...state]
       return replace(arr2, product2)
     default:
