@@ -45,17 +45,17 @@ class Cart extends Component {
   }
 
   cartTotalPrice(cart) {
-    const needsPadding = (numString, regex = /\.\d$/) => regex.test(numString) // Ends in a decimal and one digit
-    const addPadding = numString =>
-      needsPadding(numString) ? numString + '0' : numString
-
     const cartTotal = cart.reduce((totalPrice, cartItem) => {
       return totalPrice + cartItem.quantity * cartItem.price
     }, 0)
-    /*  Decimals ending in zeros are truncated to the first nonzero number after the decimal place.
-    This would look funny in prices. */
-    const stringTotal = addPadding(String(cartTotal))
-    return stringTotal
+    return cartTotal
+  }
+
+  stringifyPrice(price) {
+    const needsPadding = (decimal, regex = /\.\d$/) => regex.test(decimal) // Ends in a decimal and one digit
+    const addPadding = decimal =>
+      needsPadding(decimal) ? decimal + '0' : decimal
+    return addPadding(String(price))
   }
 
   render() {
@@ -86,7 +86,7 @@ class Cart extends Component {
           </div>
         ))}
         <hr />
-        <div>{`Total: ${this.cartTotalPrice(cart)}`}</div>
+        <div>{`Total: ${this.stringifyPrice(this.cartTotalPrice(cart))}`}</div>
       </div>
     )
   }
