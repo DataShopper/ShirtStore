@@ -33,13 +33,13 @@ class SingleProduct extends Component {
     evt.preventDefault()
     try {
       let item = {
-        name: this.props.name,
+        name: this.props.singleItem.name,
         productId: this.props.singleItem.id,
         size: this.state.sizeChosen,
         price: this.props.singleItem.price,
         color: this.state.colorChosen,
         category: this.state.categoryChosen,
-        quantity: this.state.quantity,
+        quantity: Number(this.state.quantity), // This is a string because it originates in the DOM, when the user chooses a quantity, but it is used for computing prices
         style: this.props.singleItem.style,
         imageUrl: this.props.singleItem.imageUrl
       }
