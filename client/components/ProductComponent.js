@@ -32,7 +32,13 @@ const ProductComponent = props => {
                 </div>
               </Link>
               <div>
+                <p>{p.name}</p>
+                <p>{p.strPrice}</p>
+                <img src={p.imageUrl} />
+                <p>{p.description}</p>
+
                 {admin && <Button onClick={() => removed(p)}>REMOVE</Button>}
+
               </div>
             </div>
           )
