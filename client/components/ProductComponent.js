@@ -1,6 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {ProductForm} from './index'
+import {Button} from 'semantic-ui-react'
 
 const ProductComponent = props => {
   const products = props.allProducts || []
@@ -9,75 +11,33 @@ const ProductComponent = props => {
   return (
     <div>
       {admin && (
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="price">
-            <input
-              name="price"
-              type="number"
-              placeholder="price"
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="name">
-            <input
-              name="name"
-              type="text"
-              placeholder="name"
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="color">
-            <input
-              name="color"
-              type="text"
-              placeholder="color"
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="description">
-            <input
-              name="description"
-              type="textarea"
-              placeholder="desc"
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="sizes">
-            <input
-              name="sizes"
-              type="textarea"
-              placeholder="size"
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="category">
-            <input
-              name="category"
-              type="textarea"
-              placeholder="category"
-              onChange={handleChange}
-            />
-          </label>
-          <button>Add Item</button>
-        </form>
+        <ProductForm
+          handleSubmit={handleSubmit}
+          removed={removed}
+          handleChange={handleChange}
+        />
       )}
-      {products.map(p => {
-        return (
-          <div key={p.id}>
-            <Link to={`/products/${p.id}`}>
+      <br />
+      <br />
+      <div className="ui three column doubling stackable centered padded grid row container">
+        {products.map(p => {
+          return (
+            <div key={p.id}>
+              <Link to={`/products/${p.id}`} key={p.id}>
+                <div className="ui raised segment">
+                  <p className="ui large header">{p.name}</p>
+                  <p className="ui small header">{p.price}</p>
+                  <img className="ui centered small image" src={p.imageUrl} />
+                  <p className="ui small header">{p.description}</p>
+                </div>
+              </Link>
               <div>
-                <p>{p.name}</p>
-                <p>{p.price}</p>
-                <img src={p.imageUrl} />
-                <p>{p.description}</p>
+                {admin && <Button onClick={() => removed(p)}>REMOVE</Button>}
               </div>
-            </Link>
-            <div>
-              {admin && <button onClick={() => removed(p)}>remove</button>}
             </div>
-          </div>
-        )
-      })}
+          )
+        })}
+      </div>
     </div>
   )
 }

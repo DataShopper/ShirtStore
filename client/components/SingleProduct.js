@@ -1,8 +1,11 @@
 import React, {Component} from 'react'
+import {Input, Button} from 'semantic-ui-react'
+import 'semantic-ui-css/semantic.min.css'
 import toastr from 'toastr'
 import {connect} from 'react-redux'
 import {removeProduct, oneItem} from '../store'
 import {Link} from 'react-router-dom'
+import {UpdateProduct} from './index'
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -57,9 +60,9 @@ class SingleProduct extends Component {
   render() {
     const admin = this.props.user.admin
     const product = this.props.singleItem || {}
-    const size = product.sizes
-    const color = product.color
-    const category = product.category
+    const size = product.sizes || []
+    const color = product.color || []
+    const category = product.category || []
     const removed = this.props.removed
     const objects = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
     if (this.state.loading) {
@@ -67,13 +70,19 @@ class SingleProduct extends Component {
     }
 
     return (
-      <div>
-        <p>{product.name}</p>
-        <p>{product.price}</p>
+      <div className="ui raised very padded centered text container segment">
+        <p className="ui large centered header">{product.name}</p>
+        <p className="ui small centered header">{product.price}</p>
         <img src={product.imageUrl} />
-        <p>{product.description}</p>
-        <select name="sizeChosen" onChange={this.handleSelect} required>
-          <option>--</option>
+        <p className="ui small centered header">{product.description}</p>
+        {admin && <UpdateProduct />}
+        <Input list="size" placeholder="SIZE" />
+        <datalist
+          id="size"
+          name="sizeChosen"
+          onChange={this.handleSelect}
+          aria-required="true"
+        >
           {size.map((size, idx) => {
             return (
               <option key={idx} name="sizeChosen">
@@ -81,40 +90,56 @@ class SingleProduct extends Component {
               </option>
             )
           })}
-        </select>
-        <select name="categoryChosen" onChange={this.handleSelect} required>
-          <option>--</option>
+        </datalist>
+        <i className="large chess rook icon" />
+        <Input list="category" placeholder="CATEGORY" />
+        <datalist
+          id="category"
+          aria-required="true"
+          name="categoryChosen"
+          onChange={this.handleSelect}
+        >
           {category.map((category, idx) => {
             return <option key={idx}>{category}</option>
           })}
-        </select>
-        <select name="colorChosen" onChange={this.handleSelect} required>
-          <option>--</option>
+        </datalist>
+        <Input list="color" placeholder="COLOR" />
+        <datalist
+          id="color"
+          name="colorChosen"
+          onChange={this.handleSelect}
+          aria-required="true"
+        >
           {color.map((color, idx) => {
-            return (
-              <option key={idx} onChange={this.handleSelect} required>
-                {color}
-              </option>
-            )
+            return <option key={idx}>{color}</option>
           })}
-        </select>
-        <select name="quantity" onChange={this.handleSelect} required>
-          <option />
+        </datalist>
+        <Input list="quantity" placeholder="QUANTITY" />
+        <datalist
+          id="quantity"
+          name="qty"
+          onChange={this.handleSelect}
+          aria-required="true"
+        >
           {objects.map((object, idx) => {
             return <option key={idx}>{object}</option>
           })}
-        </select>
+        </datalist>
         <div>
-          <button type="submit" onClick={this.handleSubmit}>
+          <Button type="submit" onClick={this.handleSubmit}>
             ADD TO CART
-          </button>
-          <button type="button">VIEW CART</button>
-          <button type="button">CONTINUE SHOPPING</button>
+          </Button>
+          <Button type="button">
+            <Link to="/cart">VIEW CART</Link>
+          </Button>
+          <Button type="button">
+            <Link to="/home">CONTINUE SHOPPING</Link>
+          </Button>
         </div>
         {admin && (
-          <button type="button" onClick={() => removed(product)}>
+          <Button type="button" onClick={() => removed(product)}>
             <Link to="/home"> Remove</Link>
-          </button>
+          </Button>
         )}
       </div>
     )
