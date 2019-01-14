@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {ProductForm} from './index'
 import {Input, Button} from 'semantic-ui-react'
-import {stringifyPrice} from '../../utils'
 
 const ProductComponent = props => {
   const products = props.allProducts || []

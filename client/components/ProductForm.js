@@ -13,7 +13,7 @@ const ProductForm = props => {
     const category = props.state.category
 
     return (
-      <div className="ui two column doubling stackable centered padded grid row container">
+      <div>
         <form className="ui-form" onSubmit={handleSubmit}>
           <label htmlFor="price">
             <Input
@@ -77,7 +77,7 @@ const ProductForm = props => {
           </label>
           <Button className="ui centered">ADD ITEM</Button>
         </form>
-      </div>   
+      </div>
     )
   } else {
     const {handleChange, handleSubmit} = props
@@ -141,8 +141,6 @@ const ProductForm = props => {
           <Button className="ui centered">ADD ITEM</Button>
         </form>
       </div>
-
-     
     )
   }
 }
