@@ -27,35 +27,8 @@ describe('End to End Test Suite', () => {
       driver.findElement(By.id('title')).getAttribute('innerHTML')
     ).to.eventually.contain('Welcome, cody@email.com')
   })
-  it('displays a list of products')
+  it('as an admin account, it can add a test t-shirt')
   return expect(
-    driver.findElement(By.id('title')).getAttribute('innerHTML')
+    driver.findElement(By.linkText('WackyShirt')).getAttribute('innerHTML')
   ).to.eventually.contain('Welcome, cody@email.com')
 })
-
-// describe('End to End Test Suite', done => {
-//   before(done => {
-//     console.log('Before everything login to the page')
-//     driver.get('http://localhost:8080').then(function(res) {
-//       driver
-//         .findElement(By.linkText('Login'))
-//         .click()
-//         .findElement(By.id('email'))
-//         .sendKeys('cody@email.com')
-//         .then(() => driver.findElement(By.id('password')).sendKeys('123'))
-//         .then(() => driver.findElement(By.id('btn')).click())
-//         .then(() => {
-//           driver.wait(until.elementLocated(By.id('title'))).then(() => {
-//             done()
-//           })
-//         })
-//     })
-//   })
-
-//   it('can read welcome message', () => {
-//     console.log('Ready to read welcome message')
-//     return expect(
-//       driver.findElement(By.id('title')).getAttribute('innerHTML')
-//     ).to.eventually.contain('Welcome, cody@email.com')
-//   })
-// })
