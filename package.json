@@ -61,13 +61,10 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.3.0",
-<<<<<<< HEAD
     "resolve-url-loader": "^3.0.0",
     "semantic-ui": "^2.4.2",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-forest-themes": "^1.0.3",
-=======
->>>>>>> 5e1018e525296721ef1532fdf1bad625cbc10449
     "semantic-ui-react": "^0.84.0",
     "sequelize": "^4.38.0",
     "socket.io": "^2.1.1",
