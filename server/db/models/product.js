@@ -66,6 +66,11 @@ const Product = db.define(
         product.color = product.color.replace(/,/g, '').split(' ')
         product.sizes = product.sizes.replace(/,/g, '').split(' ')
         product.category = product.category.replace(/,/g, '').split(' ')
+      },
+      beforeUpdate: product => {
+        product.color = product.color.split(', ')
+        product.sizes = product.sizes.split(', ')
+        product.category = product.category.split(', ')
       }
     }
   }

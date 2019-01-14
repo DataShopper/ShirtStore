@@ -5,26 +5,69 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>BOILERMAKER</h1>
+  <div className="red column">
+    <h1 className="ui huge centered header">Shirt Store</h1>
     <nav>
       {isLoggedIn ? (
-        <div>
+        <div className="ui five column doubling stackable centered grid row container">
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/purchasedOrders">Past Orders</Link>
-          <Link to="/account"> Account </Link>
-          <Link to="/cart"> Cart </Link>
+          <Link to="/home">
+            <div className="ui animated fade button">
+              <div className="visible content">SHOPPING</div>
+              <div className="hidden content">Shopping</div>
+            </div>
+          </Link>
+          <Link to="/purchasedOrders">
+            {' '}
+            <div className="ui animated fade button">
+              <div className="visible content">PAST ORDERS</div>
+              <div className="hidden content">Past Orders</div>
+            </div>
+          </Link>
+          <Link to="/account">
+            {' '}
+            <div className="ui animated fade button">
+              <div className="visible content">YOUR ACCOUNT</div>
+              <div className="hidden content">Your Account</div>
+            </div>
+          </Link>
+          <Link to="/cart">
+            {' '}
+            <div className="ui animated fade button">
+              <div className="visible content">SHOPPING CART</div>
+              <div className="hidden content">Shopping Cart</div>
+            </div>
+          </Link>
           <a href="#" onClick={handleClick}>
-            Logout
+            <div className="ui animated fade button">
+              <div className="visible content">LOGOUT</div>
+              <div className="hidden content">Logout</div>
+            </div>
           </a>
         </div>
       ) : (
-        <div>
+        <div className="ui three column doubling stackable centered grid row container">
           {/* The navbar will show these links before you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/home">
+            <div className="ui animated fade button">
+              <div className="visible content">SHOPPING</div>
+              <div className="hidden content">Shopping</div>
+            </div>
+          </Link>
+          <Link to='/login'>
+          {' '}
+          <div className="ui animated fade button">
+              <div className="visible content">LOGIN</div>
+              <div className="hidden content">Login</div>
+            </div>
+          </Link>
+          <Link to='/signup'>
+          {' '}
+          <div className="ui animated fade button">
+              <div className="visible content">SIGNUP</div>
+              <div className="hidden content">Signup</div>
+            </div>
+          </Link>
         </div>
       )}
     </nav>
