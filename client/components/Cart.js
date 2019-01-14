@@ -57,7 +57,7 @@ class Cart extends Component {
     const needsPadding = (decimal, regex = /\.\d$/) => regex.test(decimal) // Ends in a decimal and one digit
     const addPadding = decimal =>
       needsPadding(decimal) ? decimal + '0' : decimal
-    return addPadding(String(price))
+    return addPadding(String(price / 100)) // First convert price to decimal
   }
 
   async placeOrder() {
@@ -87,7 +87,7 @@ class Cart extends Component {
               <ul>{`Quantity: ${cartItem.quantity}`}</ul>
               <ul>{`Color: ${cartItem.color}`}</ul>
               <ul>{`Size: ${cartItem.size}`}</ul>
-              <ul>{`Price: ${cartItem.price}`}</ul>
+              <ul>{`Price: ${this.stringifyPrice(cartItem.price)}`}</ul>
             </li>
             <button
               onClick={() => {
