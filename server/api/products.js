@@ -26,6 +26,7 @@ router.post('/', async (req, res, next) => {
 
 router.get('/:productId', async (req, res, next) => {
   try {
+    // OB/MS: unnecessary log (shouldn't get into master)
     console.log('id', req.params.productId)
     const product = await Product.findById(req.params.productId)
     res.json(product)

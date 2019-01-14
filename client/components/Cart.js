@@ -60,13 +60,16 @@ class Cart extends Component {
     return addPadding(String(price / 100)) // First convert price to decimal
   }
 
+  // OB/MS: love the smaller methods—consider making a separate file for these methods (maybe)
   async placeOrder() {
     const cart = this.state.cart
     const totalPrice = this.cartTotalPrice(this.state.cart)
+    // OB/MS: could be its own method
     const clearCart = () => {
       localStorage.clear()
       this.setState({cart: []})
     }
+    // OB/MS: error handling here
     await axios.post('/api/orders', {cart, totalPrice})
     clearCart()
   }

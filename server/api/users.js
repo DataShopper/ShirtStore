@@ -16,8 +16,10 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// OB/MS: could instead have PUT /api/users/:theirId (more standard, more expected)
 router.put('/account', async (req, res, next) => {
   try {
+    // OB/MS: should have access control
     const response = await User.update(
       {
         firstName: req.body.firstName,

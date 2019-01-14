@@ -17,6 +17,7 @@ class Account extends Component {
   }
 
   componentDidMount() {
+    // OB/MS: could happen in the constructor
     this.setState({
       firstName: this.props.user.firstName,
       lastName: this.props.user.lastName,

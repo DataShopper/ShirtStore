@@ -54,7 +54,9 @@ const Product = db.define(
   },
   {
     hooks: {
+      // OB/MS: this could be a setter instead of hook
       beforeCreate: product => {
+        // OB/MS: regex can be expensive to construct, define them outside the function
         product.color = product.color.replace(/,/g, '').split(' ')
         product.sizes = product.sizes.replace(/,/g, '').split(' ')
         product.category = product.category.replace(/,/g, '').split(' ')

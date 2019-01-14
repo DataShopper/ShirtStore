@@ -5,6 +5,7 @@ const {OrderDetail} = require('../db/models')
 // get all api/orders?userId=5
 router.get('/', async (req, res, next) => {
   try {
+    // OB/MS: access control
     const orders = await Order.findAll({
       where: {
         userId: req.query.userId,
@@ -20,9 +21,21 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
+    // OB/MS: if you find your route handlers getting larger think about refactoring, here maybe you could define a "checkout" method on order model
     const {cart, totalPrice} = req.body
     const order = await Order.create({totalPrice})
 
+    // OB/MS: nested "eager" create with include (kinda neat)
+    /*
+    Order.create({
+      whatever,
+      orderDetails: [{
+        otherStuff
+      }]
+    }, {
+      include: [OrderDetail]
+    })
+    */
     const orderDetails = await Promise.all(
       cart.map(cartItem =>
         OrderDetail.create({
