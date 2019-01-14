@@ -48,26 +48,10 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       ) : (
         <div className="ui three column doubling stackable centered grid row container">
           {/* The navbar will show these links before you log in */}
-          <Link to="/home">
-            <div className="ui animated fade button">
-              <div className="visible content">GO SHOPPING</div>
-              <div className="hidden content">Go Shopping</div>
-            </div>
-          </Link>
-          <Link to="/login">
-            {' '}
-            <div className="ui animated fade button">
-              <div className="visible content">LOGIN</div>
-              <div className="hidden content">Login</div>
-            </div>
-          </Link>
-          <Link to="/signup">
-            {' '}
-            <div className="ui animated fade button">
-              <div className="visible content">SIGNUP</div>
-              <div className="hidden content">Signup</div>
-            </div>
-          </Link>
+          <Link to="/home">Home</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Sign Up</Link>
+          <Link to="/search">Search</Link>
         </div>
       )}
     </nav>
