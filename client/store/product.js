@@ -5,6 +5,7 @@ import axios from 'axios'
  */
 const PRODUCTS = 'PRODUCTS'
 const ADD_PRODUCT = 'ADD_PRODUCT'
+const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 
 /**
  * ACTION CREATORS
@@ -16,6 +17,11 @@ export const getProducts = products => ({
 
 export const addProduct = product => ({
   type: ADD_PRODUCT,
+  product
+})
+
+export const remove = product => ({
+  type: REMOVE_PRODUCT,
   product
 })
 /**
@@ -40,6 +46,15 @@ export const fetchProducts = () => async dispatch => {
   }
 }
 
+export const removeProduct = product => async dispatch => {
+  try {
+    const {data} = await axios.delete(`/api/products/${product.id}`)
+    dispatch(remove(product))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -50,6 +65,11 @@ const products = (state = [], action) => {
     case ADD_PRODUCT:
       const product = action.product
       return [...state, product]
+    case REMOVE_PRODUCT:
+      const id = action.product.id
+      const newArr = [...state]
+      const arr = newArr.filter(elem => elem.id !== id)
+      return arr
     default:
       return state
   }

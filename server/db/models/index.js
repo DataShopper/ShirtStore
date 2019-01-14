@@ -19,7 +19,7 @@ User.hasMany(Payment) //userId in Payment
 OrderDetail.belongsTo(Product) //productId in OrderDetail
 
 OrderDetail.belongsTo(Order) //orderId in OrderDetail
-Order.hasMany(OrderDetail) //orderId in OrderDetail
+Order.hasMany(OrderDetail, {as: 'details'}) //orderId in OrderDetail
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,

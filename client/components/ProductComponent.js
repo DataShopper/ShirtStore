@@ -1,13 +1,14 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 
-const ProducComponent = props => {
-  const products = props.state.products || []
-  const user = props.user.admin
-  const {handleSubmit, handleChange} = props
+const ProductComponent = props => {
+  const products = props.allProducts || []
+  const admin = props.user.admin
+  const {handleSubmit, handleChange, removed} = props
   return (
     <div>
-      {user && (
+      {admin && (
         <form onSubmit={handleSubmit}>
           <label htmlFor="price">
             <input
@@ -49,23 +50,44 @@ const ProducComponent = props => {
               onChange={handleChange}
             />
           </label>
+          <label htmlFor="category">
+            <input
+              name="category"
+              type="textarea"
+              placeholder="category"
+              onChange={handleChange}
+            />
+          </label>
           <button>Add Item</button>
         </form>
       )}
       {products.map(p => {
         return (
-          <Link to={`/products/${p.id}`} key={p.id}>
+          <div key={p.id}>
+            <Link to={`/products/${p.id}`}>
+              <div>
+                <p>{p.name}</p>
+                <p>{p.price}</p>
+                <img src={p.imageUrl} />
+                <p>{p.description}</p>
+              </div>
+            </Link>
             <div>
-              <p>{p.name}</p>
-              <p>{p.price}</p>
-              <img src={p.imageUrl} />
-              <p>{p.description}</p>
+              {admin && <button onClick={() => removed(p)}>remove</button>}
             </div>
-          </Link>
+          </div>
         )
       })}
     </div>
   )
 }
 
-export default ProducComponent
+const mapStateToProps = state => {
+  return {
+    product: state.singleProduct,
+    user: state.user,
+    allProducts: state.products
+  }
+}
+
+export default connect(mapStateToProps)(ProductComponent)
