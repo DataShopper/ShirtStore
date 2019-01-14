@@ -31,6 +31,8 @@ class SingleProduct extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
+    const quantity = Number(this.state.quantity)
+    const totalPrice = quantity * this.props.singleItem.price
     try {
       let item = {
         name: this.props.singleItem.name,
@@ -39,7 +41,8 @@ class SingleProduct extends Component {
         price: this.props.singleItem.price,
         color: this.state.colorChosen,
         category: this.state.categoryChosen,
-        quantity: Number(this.state.quantity), // This is a string because it originates in the DOM, when the user chooses a quantity, but it is used for computing prices
+        quantity, // This is a string because it originates in the DOM, when the user chooses a quantity. Convert because it is used for computing prices.
+        totalPrice,
         style: this.props.singleItem.style,
         imageUrl: this.props.singleItem.imageUrl
       }

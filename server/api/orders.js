@@ -19,9 +19,21 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const cart = req.body
-    // const orderTotal = Object.keys(cart).reduce(cartItem => cartItem.quantity
-    // order.se
+    const {cart, totalPrice} = req.body
+    const order = await Order.create({totalPrice})
+
+    const orderDetails = await Promise.all(
+      cart.map(cartItem =>
+        OrderDetail.create({
+          quantity: cartItem.quantity,
+          size: cartItem.size,
+          color: cartItem.color,
+          totalPrice: cartItem.totalPrice
+        })
+      )
+    )
+    await order.setDetails(orderDetails)
+    res.status(201).end('Order received')
   } catch (error) {
     next(error)
   }
