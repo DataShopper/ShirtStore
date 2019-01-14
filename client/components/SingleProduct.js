@@ -76,25 +76,21 @@ class SingleProduct extends Component {
         <p className="ui small centered header">{product.price}</p>
         <img src={product.imageUrl} />
         <p className="ui small centered header">{product.description}</p>
+        {admin && <UpdateProduct />}
         <Input list="size" placeholder="SIZE" />
-        <datalist id="size">
-          <div>
-            {admin && <UpdateProduct />}
-            <p>{product.name}</p>
-            <p>${product.price}</p>
-            <img src={product.imageUrl} />
-            <p>{product.description}</p>
-            <select name="sizeChosen" onChange={this.handleSelect} required>
-              <option>--</option>
-              {size.map((size, idx) => {
-                return (
-                  <option key={idx} name="sizeChosen">
-                    {size}
-                  </option>
-                )
-              })}
-            </select>
-          </div>
+        <datalist
+          id="size"
+          name="sizeChosen"
+          onChange={this.handleSelect}
+          aria-required="true"
+        >
+          {size.map((size, idx) => {
+            return (
+              <option key={idx} name="sizeChosen">
+                {size}
+              </option>
+            )
+          })}
         </datalist>
         <i className="large chess rook icon" />
         <Input list="category" placeholder="CATEGORY" />
@@ -104,11 +100,9 @@ class SingleProduct extends Component {
           name="categoryChosen"
           onChange={this.handleSelect}
         >
-          <select>
-            {category.map((category, idx) => {
-              return <option key={idx}>{category}</option>
-            })}
-          </select>
+          {category.map((category, idx) => {
+            return <option key={idx}>{category}</option>
+          })}
         </datalist>
         <Input list="color" placeholder="COLOR" />
         <datalist
@@ -117,23 +111,9 @@ class SingleProduct extends Component {
           onChange={this.handleSelect}
           aria-required="true"
         >
-          <option>color</option>
-          <select name="categoryChosen" onChange={this.handleSelect} required>
-            <option>--</option>
-            {category.map((category, idx) => {
-              return <option key={idx}>{category}</option>
-            })}
-          </select>
-          <select name="colorChosen" onChange={this.handleSelect} required>
-            <option>--</option>
-            {color.map((color, idx) => {
-              return (
-                <option key={idx} onChange={this.handleSelect} required>
-                  {color}
-                </option>
-              )
-            })}
-          </select>
+          {color.map((color, idx) => {
+            return <option key={idx}>{color}</option>
+          })}
         </datalist>
         <Input list="quantity" placeholder="QUANTITY" />
         <datalist
@@ -142,47 +122,10 @@ class SingleProduct extends Component {
           onChange={this.handleSelect}
           aria-required="true"
         >
-          <option>quantity</option>
-          <select name="qty" onChange={this.handleSelect} required>
-            <option />
-            {objects.map((object, idx) => {
-              return <option key={idx}>{object}</option>
-            })}
-          </select>
-        </datalist>
-        <p>{product.description}</p>
-        <select name="sizeChosen" onChange={this.handleSelect} required>
-          <option>--</option>
-          {size.map((size, idx) => {
-            return (
-              <option key={idx} name="sizeChosen">
-                {size}
-              </option>
-            )
-          })}
-        </select>
-        <select name="categoryChosen" onChange={this.handleSelect} required>
-          <option>--</option>
-          {category.map((category, idx) => {
-            return <option key={idx}>{category}</option>
-          })}
-        </select>
-        <select name="colorChosen" onChange={this.handleSelect} required>
-          <option>--</option>
-          {color.map((color, idx) => {
-            return (
-              <option key={idx} onChange={this.handleSelect} required>
-                {color}
-              </option>
-            )
-          })}
-        </select>
-        <select name="quantity" onChange={this.handleSelect} required>
-          <option />
           {objects.map((object, idx) => {
             return <option key={idx}>{object}</option>
           })}
-        </select>
+        </datalist>
         <div>
           <Button type="submit" onClick={this.handleSubmit}>
             ADD TO CART
