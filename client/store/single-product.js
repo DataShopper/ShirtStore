@@ -25,6 +25,7 @@ export const oneItem = id => async dispatch => {
 
 export const updateProduct = product => async dispatch => {
   try {
+    console.log('product', product)
     await axios.put(`/api/products/${product.id}`, product)
     dispatch(update(product))
     history.push('/home')
@@ -39,9 +40,9 @@ const singleProduct = (state = {}, action) => {
       return action.product
     case UPDATE_PRODUCT:
       const product2 = action.product
-      product2.sizes = product2.sizes.split(', ')
-      product2.color = product2.color.split(', ')
-      product2.category = product2.category.split(', ')
+      product2.sizes = product2.sizes.split(',')
+      product2.color = product2.color.split(',')
+      product2.category = product2.category.split(',')
       return product2
     default:
       return state

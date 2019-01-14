@@ -11,6 +11,21 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/search', async (req, res, next) => {
+  try {
+    const result = await Product.findAll({
+      where: {
+        color: {
+          $like: ['red']
+        }
+      }
+    })
+    res.json(result)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     if (req.user.admin) {
@@ -29,7 +44,6 @@ router.put('/:productId', async (req, res, next) => {
     if (req.user.admin) {
       const product = await Product.findById(req.params.productId)
       const updated = await product.update(req.body)
-      console.log(updated)
       res.sendStatus(204)
     } else {
       res.sendStatus(401)

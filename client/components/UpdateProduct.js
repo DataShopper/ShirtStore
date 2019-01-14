@@ -21,9 +21,11 @@ class UpdateProduct extends React.Component {
 
   async componentDidMount() {
     await this.setState(this.props.singleProduct)
-    this.state.color = this.state.color.toString()
-    this.state.sizes = this.state.sizes.toString()
-    this.state.category = this.state.category.toString()
+    await this.setState({
+      color: this.state.color.join(', '),
+      sizes: this.state.sizes.join(', '),
+      category: this.state.category.join(', ')
+    })
   }
   async handleChange(evt) {
     this.setState({

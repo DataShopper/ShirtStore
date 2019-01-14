@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {UPDATE_PRODUCT} from './single-product'
 
 /**
  * ACTION TYPES
@@ -7,6 +6,7 @@ import {UPDATE_PRODUCT} from './single-product'
 const PRODUCTS = 'PRODUCTS'
 const ADD_PRODUCT = 'ADD_PRODUCT'
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
+const SEARCH = 'SEARCH'
 
 /**
  * ACTION CREATORS
@@ -26,9 +26,23 @@ export const remove = product => ({
   product
 })
 
+export const search = search => ({
+  type: SEARCH,
+  search
+})
 /**
  * THUNK CREATORS
  */
+
+export const searchAll = () => async dispatch => {
+  try {
+    const {data} = await axios.get(`/api/products`)
+    console.log('data', data)
+    dispatch(search(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 export const addOneProduct = product => async dispatch => {
   try {
@@ -80,10 +94,9 @@ const products = (state = [], action) => {
       const newArr = [...state]
       const arr = newArr.filter(elem => elem.id !== id)
       return arr
-    case UPDATE_PRODUCT:
-      const product2 = action.product
-      const arr2 = [...state]
-      return replace(arr2, product2)
+    case SEARCH:
+      console.log('search', action.search)
+      return action.search
     default:
       return state
   }

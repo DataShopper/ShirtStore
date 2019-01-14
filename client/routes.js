@@ -11,7 +11,8 @@ import {
   Cart,
   AllProducts,
   Account,
-  PurchasedOrders
+  PurchasedOrders,
+  Search
 } from './components'
 
 /**
@@ -31,6 +32,7 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route exact path="/home" component={UserHome} />
         <Route path="/products/:productId" component={SingleProduct} />
+        <Route path="/search" component={Search} />
 
         {isLoggedIn && (
           <Switch>
@@ -39,6 +41,7 @@ class Routes extends Component {
             <Route exact path="/home" component={UserHome} />
             <Route path="/purchasedOrders" component={PurchasedOrders} />
             <Route exact path="/products" component={AllProducts} />
+            <Route path="/search" component={Search} />
             <Route path="/products/:productId" component={SingleProduct} />
             <Route path="/account" component={Account} />
             <Route path="/cart" component={Cart} />
