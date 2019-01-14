@@ -2,13 +2,14 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {ProductForm} from './index'
-
 import {Input, Button} from 'semantic-ui-react'
+import {stringifyPrice} from '../../utils'
 
 const ProductComponent = props => {
   const products = props.allProducts || []
   const admin = props.user.admin
   const {handleSubmit, handleChange, removed} = props
+
   return (
     <div>
       {admin && (
@@ -27,7 +28,7 @@ const ProductComponent = props => {
               <Link to={`/products/${p.id}`} key={p.id}>
                 <div className="ui raised segment">
                   <p className="ui large header">{p.name}</p>
-                  <p className="ui small header">{p.price}</p>
+                  <p className="ui small header">{p.strPrice}</p>
                   <img className="ui centered small image" src={p.imageUrl} />
                   <p className="ui small header">{p.description}</p>
                 </div>
