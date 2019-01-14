@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const {stringifyPrice} = require('../../../utils')
 
 const Product = db.define(
   'product',
@@ -17,6 +18,13 @@ const Product = db.define(
       type: Sequelize.INTEGER,
       validate: {
         notEmpty: true
+      }
+    },
+
+    strPrice: {
+      type: Sequelize.VIRTUAL,
+      get() {
+        return stringifyPrice(this.getDataValue('price'))
       }
     },
 

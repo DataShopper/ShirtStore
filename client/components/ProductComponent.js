@@ -67,7 +67,7 @@ const ProductComponent = props => {
             <Link to={`/products/${p.id}`}>
               <div>
                 <p>{p.name}</p>
-                <p>{p.price}</p>
+                <p>{p.strPrice}</p>
                 <img src={p.imageUrl} />
                 <p>{p.description}</p>
               </div>

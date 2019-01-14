@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
+import {stringifyPrice} from '../../utils'
 
 class Cart extends Component {
   constructor(props) {
@@ -53,13 +54,6 @@ class Cart extends Component {
     return cartTotal
   }
 
-  stringifyPrice(price) {
-    const needsPadding = (decimal, regex = /\.\d$/) => regex.test(decimal) // Ends in a decimal and one digit
-    const addPadding = decimal =>
-      needsPadding(decimal) ? decimal + '0' : decimal
-    return addPadding(String(price / 100)) // First convert price to decimal
-  }
-
   async placeOrder() {
     const cart = this.state.cart
     const totalPrice = this.cartTotalPrice(this.state.cart)
@@ -87,7 +81,7 @@ class Cart extends Component {
               <ul>{`Quantity: ${cartItem.quantity}`}</ul>
               <ul>{`Color: ${cartItem.color}`}</ul>
               <ul>{`Size: ${cartItem.size}`}</ul>
-              <ul>{`Price: ${this.stringifyPrice(cartItem.price)}`}</ul>
+              <ul>{`Price: ${cartItem.strPrice}`}</ul>
             </li>
             <button
               onClick={() => {
@@ -99,7 +93,7 @@ class Cart extends Component {
           </div>
         ))}
         <hr />
-        <div>{`Total: ${this.stringifyPrice(this.cartTotalPrice(cart))}`}</div>
+        <div>{`Total: ${stringifyPrice(this.cartTotalPrice(cart))}`}</div>
         {localStorage.length > 0 && (
           <button onClick={this.placeOrder}>Order</button>
         )}

@@ -37,6 +37,7 @@ class SingleProduct extends Component {
       let item = {
         name: this.props.singleItem.name,
         productId: this.props.singleItem.id,
+        strPrice: this.props.singleItem.strPrice,
         size: this.state.sizeChosen,
         price: this.props.singleItem.price,
         color: this.state.colorChosen,
