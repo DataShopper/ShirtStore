@@ -91,12 +91,9 @@
     "babel-eslint": "^8.2.6",
     "babel-loader": "^8.0.0-beta.4",
     "chai": "^3.5.0",
-<<<<<<< HEAD
     "css-loader": "^2.1.0",
-=======
     "chai-as-promised": "^7.1.1",
     "chromedriver": "^2.45.0",
->>>>>>> 5e1018e525296721ef1532fdf1bad625cbc10449
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.0",
     "eslint": "^4.19.1",
