@@ -21,7 +21,8 @@
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client ",
-    "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
+    "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
+    "test:e2e": "mocha --timeout 20000 e2e/tests.js"
   },
   "lint-staged": {
     "*.{js,jsx}": [
@@ -60,10 +61,13 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.3.0",
+<<<<<<< HEAD
     "resolve-url-loader": "^3.0.0",
     "semantic-ui": "^2.4.2",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-forest-themes": "^1.0.3",
+=======
+>>>>>>> 5e1018e525296721ef1532fdf1bad625cbc10449
     "semantic-ui-react": "^0.84.0",
     "sequelize": "^4.38.0",
     "socket.io": "^2.1.1",
@@ -90,7 +94,12 @@
     "babel-eslint": "^8.2.6",
     "babel-loader": "^8.0.0-beta.4",
     "chai": "^3.5.0",
+<<<<<<< HEAD
     "css-loader": "^2.1.0",
+=======
+    "chai-as-promised": "^7.1.1",
+    "chromedriver": "^2.45.0",
+>>>>>>> 5e1018e525296721ef1532fdf1bad625cbc10449
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.0",
     "eslint": "^4.19.1",
@@ -109,6 +118,7 @@
     "react-test-renderer": "^16.4.2",
     "redux-devtools-extension": "^2.13.5",
     "redux-mock-store": "^1.5.3",
+    "selenium-webdriver": "^4.0.0-alpha.1",
     "supertest": "^3.1.0",
     "toastr": "^2.1.4",
     "webpack": "^4.16.4",

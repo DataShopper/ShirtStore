@@ -16,23 +16,29 @@ const ProductComponent = props => {
           handleChange={handleChange}
         />
       )}
-      {products.map(p => {
-        return (
-          <div key={p.id}>
-            <Link to={`/products/${p.id}`}>
-              <div>
-                <p>{p.name}</p>
-                <p>{p.price}</p>
-                <img src={p.imageUrl} />
-                <p>{p.description}</p>
+      <br />
+      <br />
+      <div
+        className="ui three column doubling stackable centered padded grid row container"
+      >
+        {products.map(p => {
+          return (
+            <div key={p.id}>
+            <Link to={`/products/${p.id}`} key={p.id}>
+              <div className="ui raised segment">
+                <p className="ui large header">{p.name}</p>
+                <p className="ui small header">{p.price}</p>
+                <img className="ui centered small image" src={p.imageUrl} />
+                <p className="ui small header">{p.description}</p>
               </div>
             </Link>
             <div>
-              {admin && <button onClick={() => removed(p)}>remove</button>}
+              {admin && <button onClick={() => removed(p)}>remove</button>}{' '}
             </div>
-          </div>
-        )
-      })}
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

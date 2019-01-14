@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
 
 class Cart extends Component {
   constructor(props) {
@@ -7,6 +8,8 @@ class Cart extends Component {
     this.state = {
       cart: []
     }
+    this.removeCartItem = this.removeCartItem.bind(this)
+    this.placeOrder = this.placeOrder.bind(this)
   }
 
   componentDidMount() {
@@ -33,18 +36,73 @@ class Cart extends Component {
     this.setState({cart})
   }
 
+  removeCartItem(productId) {
+    if (localStorage.length > 0) {
+      localStorage.removeItem(productId) // Remove item from both localStorage and component state
+      const cart = this.state.cart.filter(
+        cartItem => productId !== cartItem.productId
+      )
+      this.setState({cart})
+    }
+  }
+
+  cartTotalPrice(cart) {
+    const cartTotal = cart.reduce((totalPrice, cartItem) => {
+      return totalPrice + cartItem.quantity * cartItem.price
+    }, 0)
+    return cartTotal
+  }
+
+  stringifyPrice(price) {
+    const needsPadding = (decimal, regex = /\.\d$/) => regex.test(decimal) // Ends in a decimal and one digit
+    const addPadding = decimal =>
+      needsPadding(decimal) ? decimal + '0' : decimal
+    return addPadding(String(price / 100)) // First convert price to decimal
+  }
+
+  async placeOrder() {
+    const cart = this.state.cart
+    const totalPrice = this.cartTotalPrice(this.state.cart)
+    const clearCart = () => {
+      localStorage.clear()
+      this.setState({cart: []})
+    }
+    await axios.post('/api/orders', {cart, totalPrice})
+    clearCart()
+  }
+
   render() {
     const {cart} = this.state
     return (
       <div>
         {cart.map(cartItem => (
-          <li key={cartItem.id}>
-            <Link to={`/products/${cartItem.id}`}>{cartItem.name}</Link>
-            <ul>{`Quantity: ${cartItem.qty}`}</ul>
-            <ul>{`Color: ${cartItem.colorChosen}`}</ul>
-            <ul>{`Size: ${cartItem.sizeChosen}`}</ul>
-          </li>
+          <div key={cartItem.productId}>
+            <li>
+              <Link to={`/products/${cartItem.productId}`}>
+                {cartItem.name}
+              </Link>
+              <div>
+                <img src={cartItem.imageUrl} />
+              </div>
+              <ul>{`Quantity: ${cartItem.quantity}`}</ul>
+              <ul>{`Color: ${cartItem.color}`}</ul>
+              <ul>{`Size: ${cartItem.size}`}</ul>
+              <ul>{`Price: ${this.stringifyPrice(cartItem.price)}`}</ul>
+            </li>
+            <button
+              onClick={() => {
+                this.removeCartItem(cartItem.productId)
+              }}
+            >
+              Remove
+            </button>
+          </div>
         ))}
+        <hr />
+        <div>{`Total: ${this.stringifyPrice(this.cartTotalPrice(cart))}`}</div>
+        {localStorage.length > 0 && (
+          <button onClick={this.placeOrder}>Order</button>
+        )}
       </div>
     )
   }

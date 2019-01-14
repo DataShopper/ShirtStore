@@ -12,9 +12,10 @@ const ProductForm = props => {
     const category = props.state.category
 
     return (
-      <form onSubmit={handleSubmit}>
+      <form className='ui-form' onSubmit={handleSubmit}>
         <label htmlFor="price">
           <input
+            className='field'
             name="price"
             type="text"
             placeholder="price"
@@ -24,6 +25,7 @@ const ProductForm = props => {
         </label>
         <label htmlFor="name">
           <input
+            className='field'
             name="name"
             type="text"
             placeholder="name"
@@ -33,6 +35,7 @@ const ProductForm = props => {
         </label>
         <label htmlFor="color">
           <input
+            className='field'
             name="color"
             type="text"
             placeholder="color"
@@ -42,8 +45,9 @@ const ProductForm = props => {
         </label>
         <label htmlFor="description">
           <input
+            className='field'
             name="description"
-            type="textarea"
+            type="text"
             placeholder="desc"
             onChange={handleChange}
             value={description}
@@ -51,8 +55,9 @@ const ProductForm = props => {
         </label>
         <label htmlFor="sizes">
           <input
+            className='field'
             name="sizes"
-            type="textarea"
+            type="text"
             placeholder="size"
             onChange={handleChange}
             value={sizes}
@@ -60,8 +65,9 @@ const ProductForm = props => {
         </label>
         <label htmlFor="category">
           <input
+            className='field'
             name="category"
-            type="textarea"
+            type="text"
             placeholder="category"
             onChange={handleChange}
             value={category}
@@ -73,9 +79,10 @@ const ProductForm = props => {
   } else {
     const {handleChange, handleSubmit} = props
     return (
-      <form onSubmit={handleSubmit}>
+      <form className='ui form' onSubmit={handleSubmit}>
         <label htmlFor="price">
           <input
+            className='field'
             name="price"
             type="text"
             placeholder="price"
@@ -84,6 +91,7 @@ const ProductForm = props => {
         </label>
         <label htmlFor="name">
           <input
+            className='field'
             name="name"
             type="text"
             placeholder="name"
@@ -92,6 +100,7 @@ const ProductForm = props => {
         </label>
         <label htmlFor="color">
           <input
+            className='field'
             name="color"
             type="text"
             placeholder="color"
@@ -100,24 +109,27 @@ const ProductForm = props => {
         </label>
         <label htmlFor="description">
           <input
+            className='field'
             name="description"
-            type="textarea"
+            type="text"
             placeholder="desc"
             onChange={handleChange}
           />
         </label>
         <label htmlFor="sizes">
           <input
+            className='field'
             name="sizes"
-            type="textarea"
+            type="text"
             placeholder="size"
             onChange={handleChange}
           />
         </label>
         <label htmlFor="category">
           <input
+            className='field'
             name="category"
-            type="textarea"
+            type="text"
             placeholder="category"
             onChange={handleChange}
           />

@@ -35,15 +35,18 @@ class SingleProduct extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
+    const quantity = Number(this.state.quantity)
+    const totalPrice = quantity * this.props.singleItem.price
     try {
       let item = {
-        name: this.props.name,
-        id: this.props.singleItem.id,
+        name: this.props.singleItem.name,
+        productId: this.props.singleItem.id,
         size: this.state.sizeChosen,
         price: this.props.singleItem.price,
         color: this.state.colorChosen,
         category: this.state.categoryChosen,
-        quantity: this.state.quantity,
+        quantity, // This is a string because it originates in the DOM, when the user chooses a quantity. Convert because it is used for computing prices.
+        totalPrice,
         style: this.props.singleItem.style,
         imageUrl: this.props.singleItem.imageUrl
       }
@@ -147,6 +150,39 @@ class SingleProduct extends Component {
             })}
           </select>
         </datalist>
+        <p>{product.description}</p>
+        <select name="sizeChosen" onChange={this.handleSelect} required>
+          <option>--</option>
+          {size.map((size, idx) => {
+            return (
+              <option key={idx} name="sizeChosen">
+                {size}
+              </option>
+            )
+          })}
+        </select>
+        <select name="categoryChosen" onChange={this.handleSelect} required>
+          <option>--</option>
+          {category.map((category, idx) => {
+            return <option key={idx}>{category}</option>
+          })}
+        </select>
+        <select name="colorChosen" onChange={this.handleSelect} required>
+          <option>--</option>
+          {color.map((color, idx) => {
+            return (
+              <option key={idx} onChange={this.handleSelect} required>
+                {color}
+              </option>
+            )
+          })}
+        </select>
+        <select name="quantity" onChange={this.handleSelect} required>
+          <option />
+          {objects.map((object, idx) => {
+            return <option key={idx}>{object}</option>
+          })}
+        </select>
         <div>
           <Button type="submit" onClick={this.handleSubmit}>
             ADD TO CART
