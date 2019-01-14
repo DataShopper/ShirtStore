@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import toastr from 'toastr'
+import {Input, Button} from 'semantic-ui-react'
 
 class Account extends Component {
   constructor() {
@@ -45,45 +46,60 @@ class Account extends Component {
   render() {
     return (
       <div>
+        {' '}
+        <br />
         <h3
+          className="ui medium centered header"
           style={{
             textAlign: 'center'
           }}
         >
           Account Profile
         </h3>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-container">
-            <label className="form-row">
-              First Name<input
-                onChange={this.handleChange}
-                name="firstName"
-                type="text"
-                value={this.state.firstName}
-                required
-              />
-            </label>
-            <label className="form-row">
-              Last Name<input
-                onChange={this.handleChange}
-                name="lastName"
-                type="text"
-                value={this.state.lastName}
-                required
-              />
-            </label>
-            <label className="form-row">
-              Email<input
-                onChange={this.handleChange}
-                name="email"
-                type="email"
-                value={this.state.email}
-                required
-              />
-            </label>
+        <div className="ui two column">
+          <form
+            className="ui-form"
+            onSubmit={this.handleSubmit}
+            style={{
+              textAlign: 'center'
+            }}
+          >
+            <div className="form-container">
+              <label className="form-row ">
+                First Name<Input
+                  onChange={this.handleChange}
+                  name="firstName"
+                  type="text"
+                  value={this.state.firstName}
+                  required
+                />
+              </label>
+              <label className="form-row">
+                Last Name<Input
+                  onChange={this.handleChange}
+                  name="lastName"
+                  type="text"
+                  value={this.state.lastName}
+                  required
+                />
+              </label>
+              <label className="form-row">
+                Email<Input
+                  onChange={this.handleChange}
+                  name="email"
+                  type="email"
+                  value={this.state.email}
+                  required
+                />
+              </label>
+            </div>
+          </form>
+          <div className="ui two column centered">
+            <Button type="submit" className="ui two column centered">
+              Save Changes
+            </Button>
           </div>
-          <button type="submit"> Save Changes</button>
-        </form>
+        </div>
       </div>
     )
   }
