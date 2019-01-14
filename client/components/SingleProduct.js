@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Button} from 'semantic-ui-react'
-import {Input} from 'semantic-ui-react'
+import {Input, Button} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import toastr from 'toastr'
 
@@ -61,14 +60,13 @@ class SingleProduct extends Component {
     }
 
     return (
-      <div className="ui raised very padded text container segment">
-        <p>{product.name}</p>
-        <p>{product.price}</p>
+      <div className="ui raised very padded centered text container segment">
+        <p className="ui large centered header">{product.name}</p>
+        <p className="ui small centered header">{product.price}</p>
         <img src={product.imageUrl} />
-        <p>{product.description}</p>
+        <p className="ui small centered header">{product.description}</p>
         <Input list="size" placeholder="SIZE" />
         <datalist id="size">
-          <option>size</option>
           {size.map((size, idx) => {
             return (
               <option key={idx} name="sizeChosen">
@@ -79,17 +77,19 @@ class SingleProduct extends Component {
         </datalist>
         <i className="large chess rook icon" />
         <Input list="category" placeholder="CATEGORY" />
-        <select
+        <datalist
+          id="category"
+          aria-required="true"
           name="categoryChosen"
           onChange={this.handleSelect}
-          aria-required="true"
         >
-          <option>category</option>
           {category.map((category, idx) => {
             return <option key={idx}>{category}</option>
           })}
-        </select>
-        <select
+        </datalist>
+        <Input list="color" placeholder="COLOR" />
+        <datalist
+          id="color"
           name="colorChosen"
           onChange={this.handleSelect}
           aria-required="true"
@@ -106,19 +106,25 @@ class SingleProduct extends Component {
               </option>
             )
           })}
-        </select>
-        <select name="qty" onChange={this.handleSelect} aria-required="true">
+        </datalist>
+        <Input list="quantity" placeholder="QUANTITY" />
+        <datalist
+          id="quantity"
+          name="qty"
+          onChange={this.handleSelect}
+          aria-required="true"
+        >
           <option>quantity</option>
           {objects.map((object, idx) => {
             return <option key={idx}>{object}</option>
           })}
-        </select>
+        </datalist>
         <div>
-          <button type="submit" onClick={this.handleSubmit}>
+          <Button type="submit" onClick={this.handleSubmit}>
             ADD TO CART
-          </button>
-          <button type="button">VIEW CART</button>
-          <button type="button">CONTINUE SHOPPING</button>
+          </Button>
+          <Button type="button">VIEW CART</Button>
+          <Button type="button">CONTINUE SHOPPING</Button>
         </div>
       </div>
     )
