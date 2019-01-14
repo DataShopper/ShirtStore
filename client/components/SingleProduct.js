@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import axios from 'axios'
 import {Input, Button} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import toastr from 'toastr'
@@ -41,6 +40,7 @@ class SingleProduct extends Component {
       let item = {
         name: this.props.singleItem.name,
         productId: this.props.singleItem.id,
+        strPrice: this.props.singleItem.strPrice,
         size: this.state.sizeChosen,
         price: this.props.singleItem.price,
         color: this.state.colorChosen,
@@ -130,13 +130,17 @@ class SingleProduct extends Component {
           <Button type="submit" onClick={this.handleSubmit}>
             ADD TO CART
           </Button>
-          <Button type="button">VIEW CART</Button>
-          <Button type="button">CONTINUE SHOPPING</Button>
+          <Button type="button">
+            <Link to="/cart">VIEW CART</Link>
+          </Button>
+          <Button type="button">
+            <Link to="/home">CONTINUE SHOPPING</Link>
+          </Button>
         </div>
         {admin && (
-          <button type="button" onClick={() => removed(product)}>
+          <Button type="button" onClick={() => removed(product)}>
             <Link to="/home"> Remove</Link>
-          </button>
+          </Button>
         )}
       </div>
     )

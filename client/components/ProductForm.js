@@ -77,7 +77,7 @@ const ProductForm = props => {
           </label>
           <Button className="ui centered">ADD ITEM</Button>
         </form>
-      </div>
+      </div>   
     )
   } else {
     const {handleChange, handleSubmit} = props
@@ -141,6 +141,8 @@ const ProductForm = props => {
           <Button className="ui centered">ADD ITEM</Button>
         </form>
       </div>
+
+     
     )
   }
 }

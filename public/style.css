@@ -19,3 +19,8 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.remove {
+  width: 70px;
+  height: 20px;
+}
