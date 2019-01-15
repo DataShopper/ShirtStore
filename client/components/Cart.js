@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import {stringifyPrice} from '../../utils'
 import CheckoutContainer from './CheckoutContainer'
+import {Input, Button} from 'semantic-ui-react'
 
 class Cart extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class Cart extends Component {
     }
   }
 
-  /* Try-block of hydrateCartFromLocalStorage is a temporary workaround for an error thrown when parsing the localStorage element at index 0, inserted by webpack. Better: prefix localStorage keys (productIds) to signal which keys should be parsed.*/
+  /* Try-block of hydrateCartFromLocalStorage is a temporary workaround for an error thrown when parsing the localStorage element at index 0, inserted by webpack. Better: prefix localStorage keys (productIds) to signal which keys shoold be parsed.*/
 
   hydrateCartFromLocalStorage() {
     let cart = []
@@ -35,7 +36,7 @@ class Cart extends Component {
         cart.push(product)
       }
     } catch (error) {
-      console.error('could not parse json value')
+      console.error('coold not parse json value')
     }
     this.setState({cart})
   }
@@ -80,38 +81,54 @@ class Cart extends Component {
     const totalPrice = this.cartTotalPrice(cart)
     return (
       <div>
-        {cart.map(cartItem => (
-          <div key={cartItem.productId}>
-            <li>
-              <Link to={`/products/${cartItem.productId}`}>
+        <br />
+        <div className="ui three column doubling stackable centered padded grid row container">
+          {cart.map(cartItem => (
+            <div key={cartItem.productId} className="ui raised segment">
+              <Link
+                to={`/products/${cartItem.productId}`}
+                className="ui large header"
+              >
                 {cartItem.name}
               </Link>
               <div>
-                <img src={cartItem.imageUrl} />
+                <img
+                  className="ui centered small image"
+                  src={cartItem.imageUrl}
+                />
               </div>
-              <ul>{`Quantity: ${cartItem.quantity}`}</ul>
-              <ul>{`Color: ${cartItem.color}`}</ul>
-              <ul>{`Size: ${cartItem.size}`}</ul>
-              <ul>{`Price: ${cartItem.strPrice}`}</ul>
-            </li>
-            <button
-              onClick={() => {
-                this.removeCartItem(cartItem.productId)
-              }}
-            >
-              Remove
-            </button>
+              <p className="ui small header">{`Quantity: ${
+                cartItem.quantity
+              }`}</p>
+              <p className="ui small header">{`Color: ${cartItem.color}`}</p>
+              <p className="ui small header">{`Size: ${cartItem.size}`}</p>
+              <p className="ui small header">{`Price: ${cartItem.strPrice}`}</p>
+              <br />
+              <Button
+                onClick={() => {
+                  this.removeCartItem(cartItem.productId)
+                }}
+              >
+                Remove
+              </Button>
+            </div>
+          ))}
+        </div>
+        <br />
+        <div className="ui three column doubling stackable centered container">
+          <div className="ui raised segment">{`Total: ${stringifyPrice(
+            this.cartTotalPrice(cart)
+          )}`}</div>
+          <div>
+            {localStorage.length > 0 && (
+              <CheckoutContainer
+                placeOrder={this.placeOrder}
+                cart={cart}
+                totalPrice={totalPrice}
+              />
+            )}
           </div>
-        ))}
-        <hr />
-        <div>{`Total: ${stringifyPrice(this.cartTotalPrice(cart))}`}</div>
-        {localStorage.length > 0 && (
-          <CheckoutContainer
-            placeOrder={this.placeOrder}
-            cart={cart}
-            totalPrice={totalPrice}
-          />
-        )}
+        </div>
       </div>
     )
   }
