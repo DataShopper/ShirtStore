@@ -8,12 +8,12 @@ class PurchasedOrders extends React.Component {
     await this.props.getPurchasedOrders(this.props.user.id)
   }
   render() {
-    const {purchasedOrders} = this.props || []
+    const {purchasedOrders} = this.props
     return (
       <div>
         <ul>
           {purchasedOrders.map(order => {
-            const shirts = order.details || []
+            const shirts = order.details
             return (
               <li key={order.id}>
                 {shirts.map(shirt => {

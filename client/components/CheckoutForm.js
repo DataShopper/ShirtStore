@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {CardElement, injectStripe} from 'react-stripe-elements'
 import toastr from 'toastr'
+import history from '../history'
 
 class CheckoutForm extends Component {
   constructor(props) {
@@ -17,9 +18,9 @@ class CheckoutForm extends Component {
         headers: {'Content-Type': 'text/plain'},
         body: token.id
       })
-      console.log('props', this.props)
       await placeOrder(cart, totalPrice)
       if (response.ok) toastr.success('Your order has been received!')
+      history.push('/purchasedOrders')
     } catch (error) {
       console.error(error)
       toastr.error('Sorry! Error processing order')

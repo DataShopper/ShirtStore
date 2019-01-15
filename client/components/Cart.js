@@ -24,7 +24,7 @@ class Cart extends Component {
     }
   }
 
-  /* Try-block of hydrateCartFromLocalStorage is a temporary workaround for an error thrown when parsing the localStorage element at index 0, inserted by webpack. Better: prefix localStorage keys (productIds) to signal which keys shoold be parsed.*/
+  /* Try-block of hydrateCartFromLocalStorage is a temporary workaround for an error thrown when parsing the localStorage element at index 0, inserted by webpack. Better: prefix localStorage keys (productIds) to signal which keys should be parsed.*/
 
   hydrateCartFromLocalStorage() {
     let cart = []
@@ -36,7 +36,7 @@ class Cart extends Component {
         cart.push(product)
       }
     } catch (error) {
-      console.error('coold not parse json value')
+      console.error('could not parse json value')
     }
     this.setState({cart})
   }
@@ -55,7 +55,6 @@ class Cart extends Component {
     const cartTotal = cart.reduce((totalPrice, cartItem) => {
       return totalPrice + cartItem.quantity * cartItem.price
     }, 0)
-    console.log('total', cartTotal)
     return cartTotal
   }
 
@@ -65,7 +64,6 @@ class Cart extends Component {
   }
 
   async placeOrder(cart, totalPrice) {
-    console.log('cart', cart)
     const userId = this.props.user.id
     const total = this.cartTotalPrice(cart)
     try {

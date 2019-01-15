@@ -43,10 +43,10 @@ const AuthForm = props => {
               <input name="lastName" id="lastName" type="text" />
             </div>
             <div>
-              <label htmlFor="Address_line_1">
+              <label htmlFor="address">
                 <small>Address Line 1</small>
               </label>
-              <input name="Address_line_1" id="Address_line_1" type="text" />
+              <input name="address" id="address" type="text" />
             </div>
           </div>
         )}
@@ -92,23 +92,34 @@ const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
-      console.log(evt.target.name)
-      let firstName = ''
-      let lastName = ''
-      let address = ''
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      if (evt.target.firstName) {
-        firstName = evt.target.firstName.value
+      let user
+      if (formName === 'login') {
+        user = {email, password}
+        dispatch(auth(formName, user))
+      } else {
+        let address, firstName, lastName
+        if (evt.target.firstName.value) {
+          firstName = evt.target.firstName.value
+        }
+        if (evt.target.lastName.value) {
+          lastName = evt.target.lastName.value
+        }
+        if (evt.target.address.value) {
+          address = evt.target.address.value
+        }
+        const newUser = {
+          email,
+          password,
+          firstName,
+          lastName,
+          address
+        }
+        user = newUser
+        dispatch(auth(formName, user))
       }
-      if (evt.target.lastName) {
-        lastName = evt.target.lastName.value
-      }
-      if (evt.target.Address_line_1) {
-        address = evt.target.Address_line_1.value
-      }
-      dispatch(auth(email, password, formName, firstName, lastName, address))
     }
   }
 }

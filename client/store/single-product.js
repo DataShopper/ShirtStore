@@ -25,7 +25,6 @@ export const oneItem = id => async dispatch => {
 
 export const updateProduct = product => async dispatch => {
   try {
-    console.log('product', product)
     await axios.put(`/api/products/${product.id}`, product)
     dispatch(update(product))
     history.push('/home')

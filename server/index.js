@@ -92,7 +92,6 @@ const createApp = () => {
   app.set('Secret', config)
 
   app.post('/authenticate', (req, res) => {
-    console.log('reqbody: ', req.body)
     if (req.body.username === 'cody@email.com') {
       if (req.body.password === '123') {
         //if eveything is okay let's create our token
