@@ -38,7 +38,7 @@ class Account extends Component {
       await axios.put('/api/users/account', this.state)
       toastr.success('Success: Your Account info has been modified.')
     } catch (err) {
-      toastr.err(err)
+      toastr.error(err)
       console.error(err)
     }
   }

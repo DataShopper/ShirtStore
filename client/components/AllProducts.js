@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchProducts, addOneProduct, removeProduct} from '../store'
 import ProductComponent from './ProductComponent'
+import toastr from 'toastr'
 
 class AllProducts extends Component {
   constructor(props) {
@@ -15,7 +16,13 @@ class AllProducts extends Component {
   }
 
   async removed(product) {
-    await this.props.remove(product)
+    try {
+      await this.props.remove(product)
+      toastr.success(`Success: The product '${product.name}' has been removed.`)
+    } catch (err) {
+      toastr.error(err)
+      console.error(err)
+    }
   }
 
   async componentDidMount() {

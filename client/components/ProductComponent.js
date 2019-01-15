@@ -20,7 +20,10 @@ const ProductComponent = props => {
       )}
       <br />
       <br />
-      <div className="ui three column doubling stackable centered padded grid row container">
+      <div
+        id="allProductscont"
+        className="ui three column doubling stackable centered padded grid row container"
+      >
         {products.map(p => {
           return (
             <div key={p.id}>
@@ -33,7 +36,11 @@ const ProductComponent = props => {
                 </div>
               </Link>
               <div>
-                {admin && <Button onClick={() => removed(p)}>REMOVE</Button>}
+                {admin && (
+                  <Button id="removeBtn" onClick={() => removed(p)}>
+                    REMOVE
+                  </Button>
+                )}
               </div>
             </div>
           )

@@ -10,15 +10,23 @@ const driver = new webdriver.Builder().forBrowser('chrome').build()
 const expect = chai.expect
 
 describe('Admin Login Test Suite', () => {
+  after(() => driver.quit())
+
   beforeEach(async () => {
     console.log('Before all Tests login to the page')
-    driver.get('http://localhost:8080/login')
+    await driver.get('http://localhost:8080/login')
     await driver
       .wait(until.elementLocated(By.id('email')))
       .sendKeys('cody@email.com')
     await driver.findElement(By.id('password')).sendKeys('123')
     await driver.findElement(By.id('loginbtn')).submit()
     await driver.wait(until.elementLocated(By.id('title')))
+    let currentUrl = await driver.getCurrentUrl()
+    try {
+      return expect(currentUrl).to.contain('http://localhost:8080/home')
+    } catch (err) {
+      console.log(err)
+    }
   })
 
   it('can read the welcome message', async () => {
@@ -27,19 +35,7 @@ describe('Admin Login Test Suite', () => {
     try {
       return expect(
         await driver.findElement(By.id('title')).getAttribute('innerHTML')
-      ).to.eventually.contain('Welcome,cody@email.com')
-    } catch (err) {
-      console.log(err)
-    }
-  })
-
-  it('can find a Add Item button on the home page', async () => {
-    //verifies: product input fields are present
-    console.log('Ready to find a Add Item')
-    try {
-      return expect(await driver.findElement(By.id('add_item_button')))
-        .getAttribute('innerHTML')
-        .to.eventually.contain('ADD ITEM' || 'Add Item')
+      ).to.contain('Welcome, cody@email.com ')
     } catch (err) {
       console.log(err)
     }
@@ -49,12 +45,12 @@ describe('Admin Login Test Suite', () => {
     //verifies: product input fields are present
     console.log('Ready to Add Item')
     await driver.wait(until.elementLocated(By.id('price'))).sendKeys('1000')
-    // await driver.findElement(By.id('name')).sendKeys('Ashleys Shirts')
-    // await driver.findElement(By.id('color')).sendKeys('red')
-    // await driver.findElement(By.id('desc')).sendKeys('A Red Shirt')
-    // await driver.findElement(By.id('size')).sendKeys('M')
-    // await driver.findElement(By.id('category')).sendKeys('womens')
-    // await driver.findElement(By.id('add_item_btn')).submit()
+    await driver.findElement(By.id('name')).sendKeys('Ashleys Shirts')
+    await driver.findElement(By.id('color')).sendKeys('red')
+    await driver.findElement(By.id('desc')).sendKeys('A Red Shirt')
+    await driver.findElement(By.id('size')).sendKeys('M')
+    await driver.findElement(By.id('category')).sendKeys('womens')
+    await driver.findElement(By.id('add_item_btn')).submit()
 
     try {
       return expect(
@@ -66,18 +62,17 @@ describe('Admin Login Test Suite', () => {
       console.log(err)
     }
   })
-
-  it('can find a product(s)on the home page', async () => {
+  it('can use the remove button', async () => {
     //verifies: a shirt is being displayed because a price symbol is present
-    console.log('Ready to find a $')
+    console.log('Ready to test the remove product button')
+    await driver.wait(until.elementLocated(By.id('allProductscont')))
+    await driver.findElement(By.id('removeBtn')).click()
     try {
       return expect(
-        await driver.findElement(
-          By.xpath('//*[@id="app"]/div/div[2]/div/div/div/div[1]')
-        )
-      )
-        .getAttribute('innerHTML')
-        .to.eventually.contain('$')
+        await driver
+          .wait(until.elementLocated(By.id('toast-container')))
+          .getAttribute('innerHTML')
+      ).to.contain('removed')
     } catch (err) {
       console.log(err)
     }
