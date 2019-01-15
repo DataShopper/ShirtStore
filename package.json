@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "engines": {
-    "node": ">= 7.0.0"
+    "node": ">= 10.10.0"
   },
   "main": "index.js",
   "scripts": {
@@ -45,6 +45,7 @@
     "express": "^4.16.4",
     "express-session": "^1.15.1",
     "file-loader": "^3.0.1",
+    "gulp": "^4.0.0",
     "gulp-util": "^3.0.8",
     "history": "^4.6.3",
     "jquery": "^3.3.1",
