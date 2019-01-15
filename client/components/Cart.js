@@ -101,13 +101,12 @@ class Cart extends Component {
         <hr />
         <div>{`Total: ${stringifyPrice(this.cartTotalPrice(cart))}`}</div>
         {localStorage.length > 0 && (
-          <button onClick={this.placeOrder}>Order</button>
+          <CheckoutContainer
+            placeOrder={this.placeOrder}
+            cart={cart}
+            totalPrice={totalPrice}
+          />
         )}
-        <CheckoutContainer
-          placeOrder={this.placeOrder}
-          cart={cart}
-          totalPrice={totalPrice}
-        />
       </div>
     )
   }
