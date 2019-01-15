@@ -12,7 +12,8 @@ import {
   AllProducts,
   Account,
   PurchasedOrders,
-  Search
+  Search,
+  CheckoutContainer
 } from './components'
 
 /**
@@ -33,6 +34,7 @@ class Routes extends Component {
         <Route exact path="/home" component={UserHome} />
         <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/search" component={Search} />
+        <Route path="/checkout" component={CheckoutContainer} />
 
         {isLoggedIn && (
           <Switch>
