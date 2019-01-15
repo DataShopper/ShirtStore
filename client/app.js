@@ -6,7 +6,7 @@ import Routes from './routes'
 class App extends Component {
   render() {
     return (
-      <StripeProvider apiKey="pk_test_TYooMQauvdEDq54NiTphI7jx">
+      <StripeProvider apiKey="pk_test_QJqh7Hj9VDs05MOowKlYcWkC">
         <div className="example">
           <Navbar />
           <Routes />

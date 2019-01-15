@@ -54,6 +54,7 @@ class Cart extends Component {
     const cartTotal = cart.reduce((totalPrice, cartItem) => {
       return totalPrice + cartItem.quantity * cartItem.price
     }, 0)
+    console.log('total', cartTotal)
     return cartTotal
   }
 
@@ -63,11 +64,11 @@ class Cart extends Component {
   }
 
   async placeOrder(cart, totalPrice) {
-    const cart = this.state.cart
+    console.log('cart', cart)
     const userId = this.props.user.id
-    const totalPrice = this.cartTotalPrice(this.state.cart)
+    const total = this.cartTotalPrice(cart)
     try {
-      await axios.post('/api/orders', {cart, totalPrice, userId})
+      await axios.post('/api/orders', {cart, total, userId})
       this.clearCart()
     } catch (error) {
       console.error('Problem processing order')
