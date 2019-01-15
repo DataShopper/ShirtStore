@@ -54,15 +54,21 @@ class Cart extends Component {
     return cartTotal
   }
 
+  clearCart() {
+    localStorage.clear()
+    this.setState({cart: []})
+  }
+
   async placeOrder() {
     const cart = this.state.cart
     const totalPrice = this.cartTotalPrice(this.state.cart)
-    const clearCart = () => {
-      localStorage.clear()
-      this.setState({cart: []})
+
+    try {
+      await axios.post('/api/orders', {cart, totalPrice})
+      this.clearCart()
+    } catch (error) {
+      console.error('Problem processing order')
     }
-    await axios.post('/api/orders', {cart, totalPrice})
-    clearCart()
   }
 
   render() {
