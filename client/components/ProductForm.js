@@ -17,6 +17,7 @@ const ProductForm = props => {
         <form className="ui-form" onSubmit={handleSubmit}>
           <label htmlFor="price">
             <Input
+              id="price"
               className="field"
               name="price"
               type="text"
@@ -27,6 +28,7 @@ const ProductForm = props => {
           </label>
           <label htmlFor="name">
             <Input
+              id="name"
               className="field"
               name="name"
               type="text"
@@ -37,6 +39,7 @@ const ProductForm = props => {
           </label>
           <label htmlFor="color">
             <Input
+              id="color"
               className="field"
               name="color"
               type="text"
@@ -47,6 +50,7 @@ const ProductForm = props => {
           </label>
           <label htmlFor="description">
             <Input
+              id="desc"
               className="field"
               name="description"
               type="text"
@@ -57,6 +61,7 @@ const ProductForm = props => {
           </label>
           <label htmlFor="sizes">
             <Input
+              id="sizes"
               className="field"
               name="sizes"
               type="text"
@@ -67,6 +72,7 @@ const ProductForm = props => {
           </label>
           <label htmlFor="category">
             <Input
+              id="category"
               className="field"
               name="category"
               type="text"
@@ -75,7 +81,9 @@ const ProductForm = props => {
               value={category}
             />
           </label>
-          <Button className="ui centered">ADD ITEM</Button>
+          <Button id="add_item_button" className="ui centered">
+            ADD ITEM
+          </Button>
         </form>
       </div>
     )
@@ -86,6 +94,7 @@ const ProductForm = props => {
         <form className="ui form" onSubmit={handleSubmit}>
           <label htmlFor="price">
             <Input
+              id="price"
               className="field"
               name="price"
               type="text"
@@ -95,6 +104,7 @@ const ProductForm = props => {
           </label>
           <label htmlFor="name">
             <Input
+              id="name"
               className="field"
               name="name"
               type="text"
@@ -104,6 +114,7 @@ const ProductForm = props => {
           </label>
           <label htmlFor="color">
             <Input
+              id="color"
               className="field"
               name="color"
               type="text"
@@ -113,6 +124,7 @@ const ProductForm = props => {
           </label>
           <label htmlFor="description">
             <Input
+              id="desc"
               className="field"
               name="description"
               type="text"
@@ -122,6 +134,7 @@ const ProductForm = props => {
           </label>
           <label htmlFor="sizes">
             <Input
+              id="size"
               className="field"
               name="sizes"
               type="text"
@@ -131,6 +144,7 @@ const ProductForm = props => {
           </label>
           <label htmlFor="category">
             <Input
+              id="category"
               className="field"
               name="category"
               type="text"
@@ -138,7 +152,9 @@ const ProductForm = props => {
               onChange={handleChange}
             />
           </label>
-          <Button className="ui centered">ADD ITEM</Button>
+          <Button id="add_item_btn" className="ui centered">
+            ADD ITEM
+          </Button>
         </form>
       </div>
     )
