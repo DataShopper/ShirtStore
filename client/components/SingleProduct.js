@@ -127,15 +127,19 @@ class SingleProduct extends Component {
           })}
         </datalist>
         <div>
-          <Button type="submit" onClick={this.handleSubmit}>
-            ADD TO CART
-          </Button>
-          <Button type="button">
-            <Link to="/cart">VIEW CART</Link>
-          </Button>
-          <Button type="button">
-            <Link to="/home">CONTINUE SHOPPING</Link>
-          </Button>
+          {!admin && (
+            <div>
+              <Button type="submit" onClick={this.handleSubmit}>
+                ADD TO CART
+              </Button>
+              <Button type="button">
+                <Link to="/cart">VIEW CART</Link>
+              </Button>
+              <Button type="button">
+                <Link to="/home">CONTINUE SHOPPING</Link>
+              </Button>
+            </div>
+          )}
         </div>
         {admin && (
           <Button type="button" onClick={() => removed(product)}>

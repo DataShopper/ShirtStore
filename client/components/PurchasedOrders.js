@@ -1,10 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getPurchasedOrders} from '../store/orders'
+import {stringifyPrice} from '../../utils'
 
 class PurchasedOrders extends React.Component {
   async componentDidMount() {
-    await this.props.getPurchasedOrders(this.props.id)
+    await this.props.getPurchasedOrders(this.props.user.id)
   }
   render() {
     const {purchasedOrders} = this.props || []
@@ -12,15 +13,18 @@ class PurchasedOrders extends React.Component {
       <div>
         <ul>
           {purchasedOrders.map(order => {
-            const shirts = order.orderdetails || []
+            const shirts = order.details || []
             return (
               <li key={order.id}>
                 {shirts.map(shirt => {
                   return (
                     <div key={shirt.id}>
-                      {shirt.color}
-                      <br />
-                      {shirt.size}
+                      <img src={shirt.imageUrl} />
+                      <div>Order #: {order.id}</div>
+                      <div>{shirt.color}</div>
+                      <div>{shirt.size}</div>
+                      <div>{shirt.quantity}</div>
+                      <div>{stringifyPrice(order.totalPrice)}</div>
                     </div>
                   )
                 })}
@@ -37,7 +41,7 @@ const mapStateToProps = state => {
   return {
     products: state.products,
     purchasedOrders: state.purchasedOrders,
-    id: state.user.id
+    user: state.user
   }
 }
 

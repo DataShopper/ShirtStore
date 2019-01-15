@@ -8,6 +8,10 @@ import {auth} from '../store'
  */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
+  let newProfile = false
+  if (name === 'signup') {
+    newProfile = true
+  }
 
   return (
     <div>
@@ -24,6 +28,28 @@ const AuthForm = props => {
           </label>
           <input name="password" id="password" type="password" />
         </div>
+        {newProfile && (
+          <div>
+            <div>
+              <label htmlFor="firstName">
+                <small>First Name</small>
+              </label>
+              <input name="firstName" id="firstName" type="text" />
+            </div>
+            <div>
+              <label htmlFor="lastName">
+                <small>Last Name</small>
+              </label>
+              <input name="lastName" id="lastName" type="text" />
+            </div>
+            <div>
+              <label htmlFor="Address_line_1">
+                <small>Address Line 1</small>
+              </label>
+              <input name="Address_line_1" id="Address_line_1" type="text" />
+            </div>
+          </div>
+        )}
         <div>
           <button type="submit" id="loginbtn">
             {displayName}

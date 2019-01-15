@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 import axios from 'axios'
 import {stringifyPrice} from '../../utils'
 
@@ -56,12 +57,13 @@ class Cart extends Component {
 
   async placeOrder() {
     const cart = this.state.cart
+    const userId = this.props.user.id
     const totalPrice = this.cartTotalPrice(this.state.cart)
     const clearCart = () => {
       localStorage.clear()
       this.setState({cart: []})
     }
-    await axios.post('/api/orders', {cart, totalPrice})
+    await axios.post('/api/orders', {cart, totalPrice, userId})
     clearCart()
   }
 
@@ -102,4 +104,10 @@ class Cart extends Component {
   }
 }
 
-export default Cart
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(Cart)
