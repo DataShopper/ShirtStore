@@ -10,6 +10,8 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+const jwt = require('jsonwebtoken')
+const config = process.env.SESSION_SECRET || 'my best friend is Cody'
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -66,6 +68,7 @@ const createApp = () => {
   // auth and api routes
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
+  //app.use('/api', ProtectedRoutes)
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
@@ -82,6 +85,38 @@ const createApp = () => {
       next()
     }
   })
+
+  /* JWT Token Authenticator to Protect API Routes */
+
+  //set secret
+  app.set('Secret', config)
+
+  app.post('/authenticate', (req, res) => {
+    if (req.body.username === 'cody@email.com') {
+      if (req.body.password === '123') {
+        //if eveything is okay let's create our token
+
+        const payload = {
+          check: true
+        }
+
+        var token = jwt.sign(payload, app.get('Secret'), {
+          expiresIn: 1440 // expires in 24 hours
+        })
+
+        res.json({
+          message: 'authentication done ',
+          token: token
+        })
+      } else {
+        res.json({message: 'please check your password !'})
+      }
+    } else {
+      res.json({message: 'user not found !'})
+    }
+  })
+
+  //----------------------------------------------------
 
   // sends index.html
   app.use('*', (req, res) => {

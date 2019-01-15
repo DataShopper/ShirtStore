@@ -30,10 +30,11 @@ export const me = () => async dispatch => {
   }
 }
 
-export const auth = (email, password, method) => async dispatch => {
+export const auth = (method, user) => async dispatch => {
+  console.log('user', user)
   let res
   try {
-    res = await axios.post(`/auth/${method}`, {email, password})
+    res = await axios.post(`/auth/${method}`, user)
   } catch (authError) {
     return dispatch(getUser({error: authError}))
   }
@@ -59,6 +60,7 @@ export const logout = () => async dispatch => {
 /**
  * REDUCER
  */
+
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:

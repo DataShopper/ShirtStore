@@ -37,7 +37,6 @@ export const search = search => ({
 export const searchAll = () => async dispatch => {
   try {
     const {data} = await axios.get(`/api/products`)
-    console.log('data', data)
     dispatch(search(data))
   } catch (err) {
     console.error(err)
@@ -95,7 +94,6 @@ const products = (state = [], action) => {
       const arr = newArr.filter(elem => elem.id !== id)
       return arr
     case SEARCH:
-      console.log('search', action.search)
       return action.search
     default:
       return state

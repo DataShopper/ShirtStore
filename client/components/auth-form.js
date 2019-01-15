@@ -8,6 +8,10 @@ import {auth} from '../store'
  */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
+  let newProfile = false
+  if (name === 'signup') {
+    newProfile = true
+  }
 
   return (
     <div>
@@ -24,6 +28,28 @@ const AuthForm = props => {
           </label>
           <input name="password" id="password" type="password" />
         </div>
+        {newProfile && (
+          <div>
+            <div>
+              <label htmlFor="firstName">
+                <small>First Name</small>
+              </label>
+              <input name="firstName" id="firstName" type="text" />
+            </div>
+            <div>
+              <label htmlFor="lastName">
+                <small>Last Name</small>
+              </label>
+              <input name="lastName" id="lastName" type="text" />
+            </div>
+            <div>
+              <label htmlFor="address">
+                <small>Address Line 1</small>
+              </label>
+              <input name="address" id="address" type="text" />
+            </div>
+          </div>
+        )}
         <div>
           <button type="submit" id="loginbtn">
             {displayName}
@@ -69,7 +95,31 @@ const mapDispatch = dispatch => {
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      let user
+      if (formName === 'login') {
+        user = {email, password}
+        dispatch(auth(formName, user))
+      } else {
+        let address, firstName, lastName
+        if (evt.target.firstName.value) {
+          firstName = evt.target.firstName.value
+        }
+        if (evt.target.lastName.value) {
+          lastName = evt.target.lastName.value
+        }
+        if (evt.target.address.value) {
+          address = evt.target.address.value
+        }
+        const newUser = {
+          email,
+          password,
+          firstName,
+          lastName,
+          address
+        }
+        user = newUser
+        dispatch(auth(formName, user))
+      }
     }
   }
 }

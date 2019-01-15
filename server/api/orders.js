@@ -5,14 +5,16 @@ const {OrderDetail} = require('../db/models')
 // get all api/orders?userId=5
 router.get('/', async (req, res, next) => {
   try {
-    const orders = await Order.findAll({
+    const order = await Order.findAll({
       where: {
-        userId: req.query.userId,
-        bought: true
+        userId: req.query.userId
       },
-      include: [OrderDetail]
+      include: [{model: OrderDetail, as: 'details'}]
     })
-    res.json(orders)
+    order.sort((a, b) => {
+      return b.id - a.id
+    })
+    res.json(order)
   } catch (error) {
     next(error)
   }
@@ -20,16 +22,19 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const {cart, totalPrice} = req.body
-    const order = await Order.create({totalPrice})
-
+    const {cart, total, userId} = req.body
+    const totalPrice = total
+    console.log(req.body)
+    const order = await Order.create({totalPrice, userId})
     const orderDetails = await Promise.all(
       cart.map(cartItem =>
         OrderDetail.create({
           quantity: cartItem.quantity,
           size: cartItem.size,
           color: cartItem.color,
-          totalPrice: cartItem.totalPrice
+          totalPrice: cartItem.totalPrice,
+          productId: cartItem.productId,
+          imageUrl: cartItem.imageUrl
         })
       )
     )

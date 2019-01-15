@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 import axios from 'axios'
 import {stringifyPrice} from '../../utils'
+import CheckoutContainer from './CheckoutContainer'
+import {Input, Button} from 'semantic-ui-react'
 
 class Cart extends Component {
   constructor(props) {
@@ -11,6 +14,7 @@ class Cart extends Component {
     }
     this.removeCartItem = this.removeCartItem.bind(this)
     this.placeOrder = this.placeOrder.bind(this)
+    this.clearCart = this.clearCart.bind(this)
   }
 
   componentDidMount() {
@@ -54,52 +58,84 @@ class Cart extends Component {
     return cartTotal
   }
 
-  async placeOrder() {
-    const cart = this.state.cart
-    const totalPrice = this.cartTotalPrice(this.state.cart)
-    const clearCart = () => {
-      localStorage.clear()
-      this.setState({cart: []})
+  clearCart() {
+    localStorage.clear()
+    this.setState({cart: []})
+  }
+
+  async placeOrder(cart, totalPrice) {
+    const userId = this.props.user.id
+    const total = this.cartTotalPrice(cart)
+    try {
+      await axios.post('/api/orders', {cart, total, userId})
+      this.clearCart()
+    } catch (error) {
+      console.error('Problem processing order')
     }
-    await axios.post('/api/orders', {cart, totalPrice})
-    clearCart()
   }
 
   render() {
     const {cart} = this.state
+    const totalPrice = this.cartTotalPrice(cart)
     return (
       <div>
-        {cart.map(cartItem => (
-          <div key={cartItem.productId}>
-            <li>
-              <Link to={`/products/${cartItem.productId}`}>
+        <br />
+        <div className="ui three column doubling stackable centered padded grid row container">
+          {cart.map(cartItem => (
+            <div key={cartItem.productId} className="ui raised segment">
+              <Link
+                to={`/products/${cartItem.productId}`}
+                className="ui large header"
+              >
                 {cartItem.name}
               </Link>
               <div>
-                <img src={cartItem.imageUrl} />
+                <img
+                  className="ui centered small image"
+                  src={cartItem.imageUrl}
+                />
               </div>
-              <ul>{`Quantity: ${cartItem.quantity}`}</ul>
-              <ul>{`Color: ${cartItem.color}`}</ul>
-              <ul>{`Size: ${cartItem.size}`}</ul>
-              <ul>{`Price: ${cartItem.strPrice}`}</ul>
-            </li>
-            <button
-              onClick={() => {
-                this.removeCartItem(cartItem.productId)
-              }}
-            >
-              Remove
-            </button>
+              <p className="ui small header">{`Quantity: ${
+                cartItem.quantity
+              }`}</p>
+              <p className="ui small header">{`Color: ${cartItem.color}`}</p>
+              <p className="ui small header">{`Size: ${cartItem.size}`}</p>
+              <p className="ui small header">{`Price: ${cartItem.strPrice}`}</p>
+              <br />
+              <Button
+                onClick={() => {
+                  this.removeCartItem(cartItem.productId)
+                }}
+              >
+                Remove
+              </Button>
+            </div>
+          ))}
+        </div>
+        <br />
+        <div className="ui three column doubling stackable centered container">
+          <div className="ui raised segment">{`Total: ${stringifyPrice(
+            this.cartTotalPrice(cart)
+          )}`}</div>
+          <div>
+            {localStorage.length > 0 && (
+              <CheckoutContainer
+                placeOrder={this.placeOrder}
+                cart={cart}
+                totalPrice={totalPrice}
+              />
+            )}
           </div>
-        ))}
-        <hr />
-        <div>{`Total: ${stringifyPrice(this.cartTotalPrice(cart))}`}</div>
-        {localStorage.length > 0 && (
-          <button onClick={this.placeOrder}>Order</button>
-        )}
+        </div>
       </div>
     )
   }
 }
 
-export default Cart
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(Cart)
