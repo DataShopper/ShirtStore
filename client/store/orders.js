@@ -10,8 +10,7 @@ const purchasedOrders = orders => ({
 export const getPurchasedOrders = userId => {
   return async dispatch => {
     try {
-      console.log('id', userId)
-      const {data} = await axios.get(`/api/orders?userId=${userId}`)
+      const {data} = await axios.get(`/api/orders`, {params: {userId}})
       dispatch(purchasedOrders(data))
     } catch (error) {
       console.error(error)

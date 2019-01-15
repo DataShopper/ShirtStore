@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 import axios from 'axios'
 import {stringifyPrice} from '../../utils'
+import CheckoutContainer from './CheckoutContainer'
 
 class Cart extends Component {
   constructor(props) {
@@ -11,6 +13,7 @@ class Cart extends Component {
     }
     this.removeCartItem = this.removeCartItem.bind(this)
     this.placeOrder = this.placeOrder.bind(this)
+    this.clearCart = this.clearCart.bind(this)
   }
 
   componentDidMount() {
@@ -51,22 +54,30 @@ class Cart extends Component {
     const cartTotal = cart.reduce((totalPrice, cartItem) => {
       return totalPrice + cartItem.quantity * cartItem.price
     }, 0)
+    console.log('total', cartTotal)
     return cartTotal
   }
 
-  async placeOrder() {
-    const cart = this.state.cart
-    const totalPrice = this.cartTotalPrice(this.state.cart)
-    const clearCart = () => {
-      localStorage.clear()
-      this.setState({cart: []})
+  clearCart() {
+    localStorage.clear()
+    this.setState({cart: []})
+  }
+
+  async placeOrder(cart, totalPrice) {
+    console.log('cart', cart)
+    const userId = this.props.user.id
+    const total = this.cartTotalPrice(cart)
+    try {
+      await axios.post('/api/orders', {cart, total, userId})
+      this.clearCart()
+    } catch (error) {
+      console.error('Problem processing order')
     }
-    await axios.post('/api/orders', {cart, totalPrice})
-    clearCart()
   }
 
   render() {
     const {cart} = this.state
+    const totalPrice = this.cartTotalPrice(cart)
     return (
       <div>
         {cart.map(cartItem => (
@@ -95,11 +106,21 @@ class Cart extends Component {
         <hr />
         <div>{`Total: ${stringifyPrice(this.cartTotalPrice(cart))}`}</div>
         {localStorage.length > 0 && (
-          <button onClick={this.placeOrder}>Order</button>
+          <CheckoutContainer
+            placeOrder={this.placeOrder}
+            cart={cart}
+            totalPrice={totalPrice}
+          />
         )}
       </div>
     )
   }
 }
 
-export default Cart
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(Cart)

@@ -17,6 +17,9 @@ const OrderDetail = db.define('orderdetail', {
   color: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  imageUrl: {
+    type: Sequelize.STRING
   }
 })
 
