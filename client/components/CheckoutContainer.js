@@ -4,11 +4,14 @@ import CheckoutForm from './CheckoutForm'
 
 class CheckoutContainer extends Component {
   render() {
-    console.log('lalalakkkkk')
-
+    const {placeOrder, cart, totalPrice} = this.props
     return (
       <Elements>
-        <CheckoutForm />
+        <CheckoutForm
+          placeOrder={placeOrder}
+          cart={cart}
+          totalPrice={totalPrice}
+        />
       </Elements>
     )
   }

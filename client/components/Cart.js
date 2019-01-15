@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import {stringifyPrice} from '../../utils'
+import CheckoutContainer from './CheckoutContainer'
 
 class Cart extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class Cart extends Component {
     }
     this.removeCartItem = this.removeCartItem.bind(this)
     this.placeOrder = this.placeOrder.bind(this)
+    this.clearCart = this.clearCart.bind(this)
   }
 
   componentDidMount() {
@@ -59,10 +61,7 @@ class Cart extends Component {
     this.setState({cart: []})
   }
 
-  async placeOrder() {
-    const cart = this.state.cart
-    const totalPrice = this.cartTotalPrice(this.state.cart)
-
+  async placeOrder(cart, totalPrice) {
     try {
       await axios.post('/api/orders', {cart, totalPrice})
       this.clearCart()
@@ -73,6 +72,7 @@ class Cart extends Component {
 
   render() {
     const {cart} = this.state
+    const totalPrice = this.cartTotalPrice(cart)
     return (
       <div>
         {cart.map(cartItem => (
@@ -103,6 +103,11 @@ class Cart extends Component {
         {localStorage.length > 0 && (
           <button onClick={this.placeOrder}>Order</button>
         )}
+        <CheckoutContainer
+          placeOrder={this.placeOrder}
+          cart={cart}
+          totalPrice={totalPrice}
+        />
       </div>
     )
   }
