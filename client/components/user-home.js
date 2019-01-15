@@ -14,7 +14,6 @@ export const UserHome = props => {
   }
   return (
     <div>
-      <h3 className="ui medium centered header">Welcome, {email} </h3>
       <h3 className="ui medium centered header" id="title">
         Welcome, {email}{' '}
       </h3>

@@ -29,7 +29,10 @@ const AuthForm = props => {
             {displayName}
           </button>
         </div>
-        {error && error.response && <div> {error.response.data} </div>}
+        {error &&
+          error.response && (
+            <div id="errorMessage"> {error.response.data} </div>
+          )}
       </form>
       <a href="/auth/google">{displayName} with Google</a>
     </div>
