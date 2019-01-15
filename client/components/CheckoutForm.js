@@ -17,7 +17,6 @@ class CheckoutForm extends Component {
         headers: {'Content-Type': 'text/plain'},
         body: token.id
       })
-      console.log('props', this.props)
       await placeOrder(cart, totalPrice)
       if (response.ok) toastr.success('Your order has been received!')
     } catch (error) {

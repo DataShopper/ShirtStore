@@ -24,7 +24,6 @@ router.post('/', async (req, res, next) => {
   try {
     const {cart, total, userId} = req.body
     const totalPrice = total
-    console.log(req.body)
     const order = await Order.create({totalPrice, userId})
     const orderDetails = await Promise.all(
       cart.map(cartItem =>
