@@ -7,7 +7,8 @@ const app = express()
 const config = process.env.SESSION_SECRET || 'my best friend is Cody'
 module.exports = router
 
-router.use('/', ProtectedRoutes)
+// router.use('/', ProtectedRoutes)
+// !!!!! NUKING THIS FOR NOW as it also interrupts the ability to update user info from the Account updater.
 
 //--------------------------------------------------------
 app.set('Secret', config) // This must be app, not router!
@@ -41,7 +42,7 @@ ProtectedRoutes.use((req, res, next) => {
 
 //--------------------------------------------------------
 
-ProtectedRoutes.get('/', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
@@ -49,14 +50,13 @@ ProtectedRoutes.get('/', async (req, res, next) => {
       // send everything to anyone who asks!
       attributes: ['id', 'email']
     })
-    res.json(users)
-    //res.redirect('/home')
+    res.redirect('/home')
   } catch (err) {
     next(err)
   }
 })
 
-ProtectedRoutes.put('/account', async (req, res, next) => {
+router.put('/account', async (req, res, next) => {
   try {
     const response = await User.update(
       {
