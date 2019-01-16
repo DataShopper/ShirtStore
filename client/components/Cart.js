@@ -83,7 +83,10 @@ class Cart extends Component {
         <br />
         <div className="ui three column doubling stackable centered grid row container">
           {cart.map(cartItem => (
-            <div style={{width: '230px'}} key={cartItem.productId}>
+            <div
+              style={{width: '280px', paddingTop: '15px'}}
+              key={cartItem.productId}
+            >
               <div className="ui raised segment">
                 <Link
                   to={`/products/${cartItem.productId}`}
@@ -117,6 +120,7 @@ class Cart extends Component {
             </div>
           ))}
         </div>
+        <br />
         <br />
         <div className="ui three column doubling stackable centered container">
           <div className="ui raised segment">{`Total: ${stringifyPrice(
