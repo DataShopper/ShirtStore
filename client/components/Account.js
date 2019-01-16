@@ -56,43 +56,64 @@ class Account extends Component {
         >
           Account Profile
         </h3>
-        <div className="ui two column">
-          <form
-            className="ui-form"
-            onSubmit={this.handleSubmit}
-            style={{
-              textAlign: 'center'
-            }}
-          >
-            <div className="form-container">
-              <label className="form-row ">
-                First Name<Input
-                  onChange={this.handleChange}
-                  name="firstName"
-                  type="text"
-                  value={this.state.firstName}
-                  required
-                />
+        <div
+          style={{
+            width: 300,
+            padding: 10,
+            margin: '0 auto'
+          }}
+        >
+          <form className="ui-form" onSubmit={this.handleSubmit}>
+            <div className="field">
+              <label>
+                <small>First Name</small>
               </label>
-              <label className="form-row">
-                Last Name<Input
-                  onChange={this.handleChange}
-                  name="lastName"
-                  type="text"
-                  value={this.state.lastName}
-                  required
-                />
-              </label>
-              <label className="form-row">
-                Email<Input
-                  onChange={this.handleChange}
-                  name="email"
-                  type="email"
-                  value={this.state.email}
-                  required
-                />
-              </label>
+              <Input
+                onChange={this.handleChange}
+                name="firstName"
+                type="text"
+                value={this.state.firstName}
+                required
+                style={{
+                  margin: -1,
+                  width: '100%'
+                }}
+              />
             </div>
+            <div className="field">
+              <label>
+                <small>Last Name</small>
+              </label>
+              <Input
+                onChange={this.handleChange}
+                name="lastName"
+                type="text"
+                value={this.state.lastName}
+                required
+                style={{
+                  margin: -1,
+                  width: '100%'
+                }}
+              />
+            </div>
+
+            {/* ******commented out until we are ready to implement email change
+            <div className="field">
+              <label>
+                <small> Email</small>il
+              </label>
+              <Input
+                onChange={this.handleChange}
+                name="email"
+                type="email"
+                value={this.state.email}
+                required
+                style={{
+                  margin: -1,
+                  width: '100%'
+                }}
+              />
+            </div> */}
             <div className="ui two column centered">
               <Button type="submit" className="ui two column centered">
                 Save Changes
