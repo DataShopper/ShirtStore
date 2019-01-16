@@ -25,9 +25,17 @@ class AllProducts extends Component {
     }
   }
 
-  async componentDidMount() {
-    this.setState({loading: false})
+  async load() {
+    if (!this.state.loading) {
+      this.setState({loading: true})
+    }
     await this.props.retrieveData()
+    this.setState({loading: false})
+  }
+  componentDidMount() {
+    setTimeout(() => {
+      this.load()
+    }, 500)
   }
 
   async handleChange(evt) {
@@ -45,7 +53,7 @@ class AllProducts extends Component {
     const products = this.props.products || []
     const user = this.props.user
     if (this.state.loading) {
-      return <div />
+      return <div className="fun">Loading</div>
     }
 
     if (products.length < 1) {

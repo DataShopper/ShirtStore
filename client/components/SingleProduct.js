@@ -20,10 +20,18 @@ class SingleProduct extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  async componentDidMount() {
+  async load() {
     const id = this.props.match.params.productId
+    if (!this.state.loading) {
+      this.setState({loading: true})
+    }
     await this.props.oneProduct(id)
     this.setState({loading: false})
+  }
+  componentDidMount() {
+    setTimeout(() => {
+      this.load()
+    }, 300)
   }
 
   async handleSelect(evt) {
@@ -67,7 +75,7 @@ class SingleProduct extends Component {
     const removed = this.props.removed
     const objects = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
     if (this.state.loading) {
-      return <div />
+      return <div className="fun">Loading</div>
     }
 
     return (

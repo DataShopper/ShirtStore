@@ -6,7 +6,10 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div className="red column">
-    <h1 className="ui huge centered header">Shirt Store</h1>
+    <h1 className="ui huge centered header">Cotten 'N Funk</h1>
+    <h3 className="ui huge centered header">
+      The same shirt for every occasion
+    </h3>
     <nav>
       {isLoggedIn ? (
         <div className="ui five column doubling stackable centered grid row container">
@@ -22,6 +25,13 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             <div className="ui animated fade button">
               <div className="visible content">PAST ORDERS</div>
               <div className="hidden content">Past Orders</div>
+            </div>
+          </Link>
+          <Link to="/search">
+            {' '}
+            <div className="ui animated fade button">
+              <div className="visible content">SEARCH</div>
+              <div className="hidden content">Search</div>
             </div>
           </Link>
           <Link to="/account">
@@ -54,16 +64,16 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               <div className="hidden content">Shopping</div>
             </div>
           </Link>
-          <Link to='/login'>
-          {' '}
-          <div className="ui animated fade button">
+          <Link to="/login">
+            {' '}
+            <div className="ui animated fade button">
               <div className="visible content">LOGIN</div>
               <div className="hidden content">Login</div>
             </div>
           </Link>
-          <Link to='/signup'>
-          {' '}
-          <div className="ui animated fade button">
+          <Link to="/signup">
+            {' '}
+            <div className="ui animated fade button">
               <div className="visible content">SIGNUP</div>
               <div className="hidden content">Signup</div>
             </div>
