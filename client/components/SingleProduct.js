@@ -100,7 +100,6 @@ class SingleProduct extends Component {
             )
           })}
         </datalist>
-        <i className="large chess rook icon" />
         <Input
           list="category"
           name="categoryChosen"
