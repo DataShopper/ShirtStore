@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {auth} from '../store'
+import {auth, logout} from '../store'
 
 /**
  * COMPONENT
@@ -16,9 +16,9 @@ const AuthForm = props => {
   return (
     <div
       style={{
-        alignItems: 'center',
         width: 300,
-        padding: 30
+        padding: 30,
+        margin: '0 auto'
       }}
     >
       <form
@@ -68,6 +68,22 @@ const AuthForm = props => {
             </div>
           </div>
         )}
+        <div
+          style={{
+            margin: -1
+          }}
+        >
+          {error &&
+            error.response && (
+              <div
+                id="errorMessage"
+                style={{marginBottom: '17px', marginTop: '15px'}}
+              >
+                {' '}
+                {error.response.data}{' '}
+              </div>
+            )}
+        </div>
         <div>
           <button
             style={{
@@ -82,10 +98,6 @@ const AuthForm = props => {
             {displayName}
           </button>
         </div>
-        {error &&
-          error.response && (
-            <div id="errorMessage"> {error.response.data} </div>
-          )}
       </form>
       <br />
       <a href="/auth/google">{displayName} with Google</a>
