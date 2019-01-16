@@ -6,11 +6,13 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div className="red column">
-    <h1 className="ui huge centered header">Cotten 'N Funk</h1>
+    <h1 style={{paddingTop: '15px'}} className="ui huge centered header">
+      Cotton 'N Funk
+    </h1>
     <h3 className="ui huge centered header">
       The same shirt for every occasion
     </h3>
-    <nav>
+    <nav style={{paddingTop: '15px'}}>
       {isLoggedIn ? (
         <div className="ui five column doubling stackable centered grid row container">
           {/* The navbar will show these links after you log in */}

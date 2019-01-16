@@ -64,7 +64,7 @@ async function seed() {
       count: 12,
       color: 'Red, Blue, Black, Green, Gold, Orange, Pink, Grey, Purple',
       imageUrl: '/defaultImage1.jpeg',
-      description: 'This shirt is funky and you love funky.',
+      description: 'This shirt is funkadelic.',
       category: 'Women, Men, Children'
     }),
     Product.create({
@@ -141,7 +141,7 @@ async function seed() {
       count: 3,
       color: 'Red, Gold, Blue, Green',
       imageUrl: '/defaultImage1.jpeg',
-      description: 'This shirt is special. Stock is limited.',
+      description: 'This shirt has a limited supply.',
       category: 'Women, Men, Children'
     })
   ])

@@ -79,80 +79,93 @@ class SingleProduct extends Component {
     }
 
     return (
-      <div className="ui raised very padded centered text container segment">
-        <p className="ui large centered header">{product.name}</p>
-        <p className="ui small centered header">{product.strPrice}</p>
-        <img src={product.imageUrl} />
-        <p className="ui small centered header">{product.description}</p>
-        {admin && <UpdateProduct />}
-        <Input
-          list="size"
-          name="sizeChosen"
-          placeholder="SIZE"
-          onChange={this.handleSelect}
-        />
-        <datalist id="size" aria-required="true">
-          {size.map((size, idx) => {
-            return (
-              <option key={idx} name="sizeChosen">
-                {size}
-              </option>
-            )
-          })}
-        </datalist>
-        <Input
-          list="category"
-          name="categoryChosen"
-          placeholder="CATEGORY"
-          onChange={this.handleSelect}
-        />
-        <datalist id="category" aria-required="true">
-          {category.map((category, idx) => {
-            return <option key={idx}>{category}</option>
-          })}
-        </datalist>
-        <Input
-          list="color"
-          name="colorChosen"
-          placeholder="COLOR"
-          onChange={this.handleSelect}
-        />
-        <datalist id="color" aria-required="true">
-          {color.map((color, idx) => {
-            return <option key={idx}>{color}</option>
-          })}
-        </datalist>
-        <Input
-          list="quantity"
-          name="quantity"
-          placeholder="QUANTITY"
-          onChange={this.handleSelect}
-        />
-        <datalist id="quantity" aria-required="true">
-          {objects.map((object, idx) => {
-            return <option key={idx}>{object}</option>
-          })}
-        </datalist>
-        <div>
-          {!admin && (
-            <div>
-              <Button type="submit" onClick={this.handleSubmit}>
-                ADD TO CART
-              </Button>
-              <Button type="button">
-                <Link to="/cart">VIEW CART</Link>
-              </Button>
-              <Button type="button">
-                <Link to="/home">CONTINUE SHOPPING</Link>
-              </Button>
+      <div style={{paddingTop: '25px'}}>
+        <div className="ui raised very padded centered text container segment">
+          <p className="ui large centered header">{product.name}</p>
+          <p className="ui small centered header">{product.strPrice}</p>
+          <img className="ui centered medium image" src={product.imageUrl} />
+          <p className="ui small centered header">{product.description}</p>
+          {admin && <UpdateProduct />}
+          <div className="ui centered container" style={{width: '500px'}}>
+            <div
+              className="ui centered container"
+              style={{width: '410px', paddingBottom: '15px'}}
+            >
+              <Input
+                list="size"
+                name="sizeChosen"
+                placeholder="SIZE"
+                onChange={this.handleSelect}
+              />
+              <datalist id="size" aria-required="true">
+                {size.map((size, idx) => {
+                  return (
+                    <option key={idx} name="sizeChosen">
+                      {size}
+                    </option>
+                  )
+                })}
+              </datalist>
+              <Input
+                list="category"
+                name="categoryChosen"
+                placeholder="CATEGORY"
+                onChange={this.handleSelect}
+              />
+              <datalist id="category" aria-required="true">
+                {category.map((category, idx) => {
+                  return <option key={idx}>{category}</option>
+                })}
+              </datalist>
+              <Input
+                list="color"
+                name="colorChosen"
+                placeholder="COLOR"
+                onChange={this.handleSelect}
+              />
+              <datalist id="color" aria-required="true">
+                {color.map((color, idx) => {
+                  return <option key={idx}>{color}</option>
+                })}
+              </datalist>
+              <Input
+                list="quantity"
+                name="quantity"
+                placeholder="QUANTITY"
+                onChange={this.handleSelect}
+              />
+              <datalist id="quantity" aria-required="true">
+                {objects.map((object, idx) => {
+                  return <option key={idx}>{object}</option>
+                })}
+              </datalist>
             </div>
-          )}
+            <div>
+              {!admin && (
+                <div
+                  className="ui centered container"
+                  style={{width: '456px', paddingBottom: '15px'}}
+                >
+                  <Button type="submit" onClick={this.handleSubmit}>
+                    ADD TO CART
+                  </Button>
+                  <Button type="button">
+                    <Link to="/cart">VIEW CART</Link>
+                  </Button>
+                  <Button type="button">
+                    <Link to="/home">CONTINUE SHOPPING</Link>
+                  </Button>
+                </div>
+              )}
+            </div>
+            {admin && (
+              <Button type="button" onClick={() => removed(product)}>
+                <Link to="/home"> Remove</Link>
+              </Button>
+            )}
+          </div>
         </div>
-        {admin && (
-          <Button type="button" onClick={() => removed(product)}>
-            <Link to="/home"> Remove</Link>
-          </Button>
-        )}
+        <br />
       </div>
     )
   }

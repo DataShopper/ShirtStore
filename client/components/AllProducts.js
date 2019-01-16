@@ -46,7 +46,15 @@ class AllProducts extends Component {
 
   async handleSubmit(evt) {
     evt.preventDefault()
-    await this.props.addOne(this.state)
+    try {
+      await this.props.addOne(this.state)
+      toastr.success(
+        `Success: The product '${this.state.name}' has been added.`
+      )
+    } catch (err) {
+      toastr.error(err)
+      console.error(err)
+    }
   }
 
   render() {
