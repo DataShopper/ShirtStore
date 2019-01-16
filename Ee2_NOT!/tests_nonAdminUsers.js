@@ -79,8 +79,8 @@ describe('Non Admin Login Test Suite', () => {
       return expect(
         driver
           .wait(until.elementLocated(By.id('errorMessage')))
-          .getAttribute('innerHTML')
-      ).to.eventually.contain('User already exists')
+          .getAttribute('value')
+      ).to.contain('Wrong username and/or password')
     } catch (err) {
       console.log(err)
     }

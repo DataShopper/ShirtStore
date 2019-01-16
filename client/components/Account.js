@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import toastr from 'toastr'
-import {Input, Button} from 'semantic-ui-react'
+import {input, Button} from 'semantic-ui-react'
 
 class Account extends Component {
   constructor(props) {
@@ -11,7 +11,8 @@ class Account extends Component {
       firstName: this.props.user.firstName,
       lastName: this.props.user.lastName,
       email: this.props.user.email,
-      id: this.props.user.id
+      id: this.props.user.id,
+      loading: true
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -22,7 +23,8 @@ class Account extends Component {
       firstName: this.props.user.firstName,
       lastName: this.props.user.lastName,
       email: this.props.user.email,
-      id: this.props.user.id
+      id: this.props.user.id,
+      loading: false
     })
   }
 
@@ -44,6 +46,9 @@ class Account extends Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return <div />
+    }
     return (
       <div>
         {' '}
@@ -53,6 +58,7 @@ class Account extends Component {
           style={{
             textAlign: 'center'
           }}
+          id="account-profile"
         >
           Account Profile
         </h3>
@@ -66,27 +72,30 @@ class Account extends Component {
           >
             <div className="form-container">
               <label className="form-row ">
-                First Name<Input
+                First Name<input
                   onChange={this.handleChange}
                   name="firstName"
+                  id="firstName"
                   type="text"
                   value={this.state.firstName}
                   required
                 />
               </label>
               <label className="form-row">
-                Last Name<Input
+                Last Name<input
                   onChange={this.handleChange}
                   name="lastName"
+                  id="lastName"
                   type="text"
                   value={this.state.lastName}
                   required
                 />
               </label>
               <label className="form-row">
-                Email<Input
+                Email<input
                   onChange={this.handleChange}
                   name="email"
+                  id="email"
                   type="email"
                   value={this.state.email}
                   required
