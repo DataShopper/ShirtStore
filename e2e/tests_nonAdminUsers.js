@@ -44,7 +44,7 @@ describe('Non Admin Login Test Suite', () => {
     }
   })
 
-  it('can signup a new user', async () => {
+  it('can signup a new user', async done => {
     //verifies: Signup functionality, that the Welcome message is user specific
 
     console.log('Ready to test Signup')
@@ -62,6 +62,7 @@ describe('Non Admin Login Test Suite', () => {
       ).to.contain('Welcome, test@email.com')
     } catch (err) {
       console.log(err)
+      done()
     }
   })
 

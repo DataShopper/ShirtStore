@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "engines": {
-    "node": ">= 7.0.0"
+    "node": "10.10.0"
   },
   "main": "index.js",
   "scripts": {
@@ -40,11 +40,13 @@
   "dependencies": {
     "axios": "^0.15.3",
     "body-parser": "^1.18.3",
+    "build": "^0.1.4",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^4.1.0",
     "express": "^4.16.4",
     "express-session": "^1.15.1",
     "file-loader": "^3.0.1",
+    "gulp": "^4.0.0",
     "gulp-util": "^3.0.8",
     "history": "^4.6.3",
     "jquery": "^3.3.1",
@@ -65,7 +67,6 @@
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.3.0",
     "resolve-url-loader": "^3.0.0",
-    "semantic-ui": "^2.4.2",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-forest-themes": "^1.0.3",
     "semantic-ui-react": "^0.84.0",
