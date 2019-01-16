@@ -31,7 +31,6 @@ export const me = () => async dispatch => {
 }
 
 export const auth = (method, user) => async dispatch => {
-  console.log('user', user)
   let res
   try {
     res = await axios.post(`/auth/${method}`, user)

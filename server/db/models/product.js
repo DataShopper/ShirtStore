@@ -63,17 +63,38 @@ const Product = db.define(
   {
     hooks: {
       beforeCreate: product => {
-        product.color = product.color.replace(/,/g, '').split(' ')
-        product.sizes = product.sizes.replace(/,/g, '').split(' ')
-        product.category = product.category.replace(/,/g, '').split(' ')
+        product.color = product.color
+          .toLowerCase()
+          .replace(/,/g, '')
+          .split(' ')
+        product.sizes = product.sizes
+          .toLowerCase()
+          .replace(/,/g, '')
+          .split(' ')
+        product.category = product.category
+          .toLowerCase()
+          .replace(/,/g, '')
+          .split(' ')
       },
       beforeUpdate: product => {
-        product.color = product.color.split(', ')
-        product.sizes = product.sizes.split(', ')
-        product.category = product.category.split(', ')
+        product.color = product.color.toLowerCase().split(', ')
+        product.sizes = product.sizes.toLowerCase().split(', ')
+        product.category = product.category.toLowerCase().split(', ')
       }
     }
   }
 )
+
+Product.search = async function(term, field) {
+  let result = []
+  let products = await Product.findAll()
+  for (let i = 0; i < products.length; i++) {
+    let color = products[i][field]
+    if (color.indexOf(term) > -1) {
+      result.push(products[i])
+    }
+  }
+  return result
+}
 
 module.exports = Product

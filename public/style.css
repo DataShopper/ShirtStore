@@ -24,3 +24,9 @@ form div {
   width: 70px;
   height: 20px;
 }
+
+.fun {
+  text-align: center;
+  font-size: 50px;
+  color: blue;
+}
