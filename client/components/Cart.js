@@ -76,39 +76,44 @@ class Cart extends Component {
 
   render() {
     const {cart} = this.state
+    console.log(cart)
     const totalPrice = this.cartTotalPrice(cart)
     return (
       <div>
         <br />
-        <div className="ui three column doubling stackable centered padded grid row container">
+        <div className="ui three column doubling stackable centered grid row container">
           {cart.map(cartItem => (
-            <div key={cartItem.productId} className="ui raised segment">
-              <Link
-                to={`/products/${cartItem.productId}`}
-                className="ui large header"
-              >
-                {cartItem.name}
-              </Link>
-              <div>
-                <img
-                  className="ui centered small image"
-                  src={cartItem.imageUrl}
-                />
+            <div style={{width: '230px'}} key={cartItem.productId}>
+              <div className="ui raised segment">
+                <Link
+                  to={`/products/${cartItem.productId}`}
+                  className="ui large header"
+                >
+                  {cartItem.name}
+                </Link>
+                <div>
+                  <img
+                    className="ui centered small image"
+                    src={cartItem.imageUrl}
+                  />
+                </div>
+                <p className="ui small header">{`Quantity: ${
+                  cartItem.quantity
+                }`}</p>
+                <p className="ui small header">{`Color: ${cartItem.color}`}</p>
+                <p className="ui small header">{`Size: ${cartItem.size}`}</p>
+                <p className="ui small header">{`Price: ${
+                  cartItem.strPrice
+                }`}</p>
+                <br />
+                <Button
+                  onClick={() => {
+                    this.removeCartItem(cartItem.productId)
+                  }}
+                >
+                  Remove
+                </Button>
               </div>
-              <p className="ui small header">{`Quantity: ${
-                cartItem.quantity
-              }`}</p>
-              <p className="ui small header">{`Color: ${cartItem.color}`}</p>
-              <p className="ui small header">{`Size: ${cartItem.size}`}</p>
-              <p className="ui small header">{`Price: ${cartItem.strPrice}`}</p>
-              <br />
-              <Button
-                onClick={() => {
-                  this.removeCartItem(cartItem.productId)
-                }}
-              >
-                Remove
-              </Button>
             </div>
           ))}
         </div>
