@@ -16,6 +16,7 @@ const AuthForm = props => {
   return (
     <div
       style={{
+        alignItems: 'center',
         width: 300,
         padding: 30
       }}
@@ -24,7 +25,10 @@ const AuthForm = props => {
         className="ui form"
         onSubmit={handleSubmit}
         name={name}
-        style={{paddingBottom: '30px'}}
+        style={{
+          paddingBottom: '30px',
+          alignContent: 'center'
+        }}
       >
         <div className="field">
           <label htmlFor="email">
