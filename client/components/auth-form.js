@@ -14,35 +14,49 @@ const AuthForm = props => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
+    <div
+      style={{
+        width: 300,
+        padding: 30
+      }}
+    >
+      <form
+        className="ui form"
+        onSubmit={handleSubmit}
+        name={name}
+        style={{paddingBottom: '30px'}}
+      >
+        <div className="field">
           <label htmlFor="email">
             <small>Email</small>
           </label>
           <input name="email" id="email" type="text" />
         </div>
-        <div>
+        <div className="field">
           <label htmlFor="password">
             <small>Password</small>
           </label>
           <input name="password" id="password" type="password" />
         </div>
         {newProfile && (
-          <div>
-            <div>
+          <div
+            style={{
+              margin: -1
+            }}
+          >
+            <div className="field">
               <label htmlFor="firstName">
                 <small>First Name</small>
               </label>
               <input name="firstName" id="firstName" type="text" />
             </div>
-            <div>
+            <div className="field">
               <label htmlFor="lastName">
                 <small>Last Name</small>
               </label>
               <input name="lastName" id="lastName" type="text" />
             </div>
-            <div>
+            <div className="field">
               <label htmlFor="address">
                 <small>Address Line 1</small>
               </label>
@@ -51,7 +65,16 @@ const AuthForm = props => {
           </div>
         )}
         <div>
-          <button type="submit" id="loginbtn">
+          <button
+            style={{
+              position: 'absolute',
+              left: 0,
+              bottom: 0
+            }}
+            className="ui button"
+            type="submit"
+            id="loginbtn"
+          >
             {displayName}
           </button>
         </div>
@@ -60,6 +83,7 @@ const AuthForm = props => {
             <div id="errorMessage"> {error.response.data} </div>
           )}
       </form>
+      <br />
       <a href="/auth/google">{displayName} with Google</a>
     </div>
   )
